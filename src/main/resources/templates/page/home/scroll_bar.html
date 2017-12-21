@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<div class="row" style="height: 405px; position: relative;" th:fragment="scroll_bar">
+    <div class="news-image-gallery-container">
+        <div class="orbit" role="region" aria-label="Favorite Space Pictures" data-orbit=""
+             data-options="animInFromLeft:fade-in; animInFromRight:fade-in; animOutToLeft:fade-out; animOutToRight:fade-out;">
+            <ul class="orbit-container">
+                <li class="is-active orbit-slide" th:each="course, iterStat : ${courses}">
+                    <a th:href="${course.resourceUrl}">
+                        <img class="orbit-image" style="height: 405px;" th:src="${course.webAdImgPath}" alt="Space"/>
+                    </a>
+                </li>
+            </ul>
+            <nav class="orbit-bullets" style="width: 100%;position: absolute;bottom: 0;text-align: center;">
+                <button class="is-active" th:each="course, iterStat : ${courses}"
+                        th:attr="data-slide=${iterStat.index}"><span
+                        class="show-for-sr">First slide details.</span><span class="show-for-sr">Current Slide</span>
+                </button>
+            </nav>
+        </div>
+    </div>
+    <div class="category-menu-container">
+        <ul style="list-style: none;color: white;">
+            <li class="category-menu-main" th:each="category :${categories}">
+                <h6><span th:text="${category.mainCategoryName}">title</span> <i class="fa fa-angle-right float-right"
+                                                                                 style="margin-top: 0.1rem;"></i></h6>
+                <div class="category-menu-sub-container">
+                    <a class="category-menu-sub"
+                       th:each="sub : ${category.subCategories}"
+                       th:href="@{'/courses?subCategory=' + ${sub.courseCategoryId}}"
+                       th:text="${sub.name}">类型1</a>
+                </div>
+            </li>
+        </ul>
+    </div>
+    <!--
+    <div class="user-login-info-container">
+        <div style="height: 75%;text-align: center;">
+            <i class="fa fa-user"
+               style="display:block;position:absolute; top:15%;left: 25%;width:96px;margin:auto;font-size: 96px;border-radius: 100% 100%;border-style: solid;vertical-align: middle;"></i>
+        </div>
+        <button style="margin-top: 20px;background-color: #44c8ed; width: 80%;height: 36px;" data-open="login_form">登陆
+        </button>
+    </div>
+    -->
+</div>
+</html>

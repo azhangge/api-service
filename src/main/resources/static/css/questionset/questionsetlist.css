@@ -1,0 +1,57 @@
+.course-sort-type-container {
+    display: inline-block;
+    position: relative;
+    padding-right: 1rem;
+    margin-left: 1rem;
+}
+
+.course-sort-title {
+    color: #8a8a8a;
+    font-size: 0.725rem;
+}
+
+.course-sort-type-title {
+    font-size: 0.725rem;
+    color: rgb(51, 51, 51);
+}
+
+.course-sort-type-title:focus, .course-sort-type-title:hover {
+    cursor: hand;
+    text-decoration: none;
+}
+
+.course-sort-asc {
+    font-size: 0.725rem;
+    color: rgb(51, 51, 51);
+    position: absolute;
+    right: 0;
+    top: 0.48rem;
+}
+
+.course-sort-desc {
+    font-size: 0.725rem;
+    color: rgb(51, 51, 51);
+    position: absolute;
+    right: 0;
+    top: 0.54rem
+}
+
+.course-sort-type-active {
+    color: #2bbb61;
+}
+
+.input-group-rounded .input-group-field {
+    border-radius: 1.5rem 0 0 1.5rem;
+    font-size: 0.725rem;
+    line-height: 1rem;
+    padding-left: 1rem;
+}
+
+.input-group-rounded .input-group-button .button {
+    border-radius: 0 1.5rem 1.5rem 0;
+    font-size: 0.8rem;
+}
+
+.question-set-type-active {
+    color: #2bbb61;
+}

@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Title</title>
+    <link rel="stylesheet" href="http://dhbhdrzi4tiry.cloudfront.net/cdn/sites/foundation.min.css"/>
+    <link rel="stylesheet" th:href="@{/static/lib/foundation/css/foundation-icons.css}"/>
+    <link rel="stylesheet" th:href="@{/static/lib/fontawesome/css/font-awesome.css}"/>
+    <link rel="stylesheet" th:href="@{/static/css/course/courselist.css}"/>
+    <link type="text/css" rel="stylesheet" th:href="@{/static/css/public/pagination.css}"/>
+    <link rel="stylesheet" th:href="@{/static/css/public/loading.css}"/>
+</head>
+<body>
+
+<div th:replace="base/header_for_no_home :: header_bar"></div>
+<div style="background-color: #eeeeee;">
+    <div class="row" style="padding: 1rem 0;">
+        <div class="medium-2 columns">
+            <ul class="vertical menu" style="width: 100%;background-color: white;">
+                <li>
+                    <a href="#" style="font-size: 0.875rem;cursor: default;">账户设置</a>
+                    <ul class="nested vertical menu" style="font-size: 0.75rem;">
+                        <li><a th:href="@{/account/basicinfo/personalinfo}">个人信息</a></li>
+                        <li><a th:href="@{/account/realinfo/realinfo}">实名认证</a></li>
+                        <li><a th:href="@{/account/modifypwd}">账户安全</a></li>
+                        <li><a th:href="@{/teacher/detail}">讲师信息</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a style="font-size: 0.875rem;" th:href="@{/notice/user/list}">我的消息</a>
+                </li>
+                <li>
+                    <a href="#" style="font-size: 0.875rem;cursor: default;">我的课程</a>
+                    <ul class="nested vertical menu" style="font-size: 0.75rem;">
+                        <li>
+                            <a href="/usercenter/operate?type=3">在学课程</a>
+                        </li>
+                        <li><a href="/usercenter/operate?type=2">已购课程</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a th:href="@{/test/answer/list}" style="font-size: 0.875rem;">我的练习</a>
+                </li>
+                <li>
+                    <a href="#" style="font-size: 0.875rem;cursor: default;">我的考试</a>
+                    <ul class="nested vertical menu" style="font-size: 0.75rem;">
+                        <li><a href="/user/examplan/list">考试日程</a></li>
+                        <li><a href="/user/exam/score/list">考试成绩</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#" style="font-size: 0.875rem;cursor: default;">我的收藏</a>
+                    <ul class="nested vertical menu" style="font-size: 0.75rem;">
+                        <li><a href="/usercenter/operate?type=1" style="color: red;">课程收藏</a></li>
+                        <li><a href="/usercenter/operate?type=9">题集收藏</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+        <div class="medium-10 columns">
+            <div class="row">
+                <nav aria-label="You are here:" role="navigation">
+                    <ul class="breadcrumbs"
+                        style="background-color: white;margin-bottom: 1rem;padding: 0.5rem 0.875rem;font-size: 1.25rem;">
+                        <li><a href="#">我的收藏</a></li>
+                        <li><a href="/usercenter/operate?type=3">课程收藏</a></li>
+
+                    </ul>
+                </nav>
+            </div>
+
+            <div th:if="${#arrays.length(result.items)} == 0">
+                <div class="row" style="text-align: center;height: 240px;line-height:240px;background: white;">
+                    <span>您没有收藏任何课程</span>
+                </div>
+            </div>
+            <div th:if="${#arrays.length(result.items)} != 0">
+                <div id="user-favorite-course" class="row small-up-2 medium-up-3 large-up-5 course-list" name="content">
+                    <div class="column course-item-container" th:each="course:${result.items}">
+                        <a th:href="@{'/course/'+ ${course.courseId}}">
+                            <img class="thumbnail course-item-thumbnail" th:if="${course.thumbnailPath} == null"
+                                 th:src="@{/static/image/default_course_thumbnail.png}"/>
+                            <img class="thumbnail course-item-thumbnail" th:if="${course.thumbnailPath} != null"
+                                 th:src="${course.thumbnailPath}"/>
+                            <h6 style="padding-left: 0.825rem;" th:if="${course.courseName} == null"></h6>
+                            <h6 style="padding-left: 0.825rem;" th:if="${course.courseName} != null"
+                                th:text="${course.courseName}"></h6>
+                            <div class="course-item-info-row">
+                                <span th:if="${course.teacherName} == null">未知讲师</span>
+                                <span th:if="${course.teacherName} != null" th:text="${course.teacherName}">未知讲师</span>
+                                <span class="float-right" th:text="${course.courseSecond}+'课时'"></span>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                <div class="row">
+                    <div id="page" class="float-right page_div"></div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<div th:replace="base/footer :: foot_section"></div>
+<div th:replace="base/common_js_imports :: commonjs"></div>
+<script type="text/javascript" th:src="@{/static/js/useroperate/userfavoritecourse.js}"></script>
+<script type="text/javascript" th:src="@{/static/js/base/loading.js}"></script>
+<script th:inline="javascript">
+    var total = [[${result.total}]];
+    pageInit(total);
+</script>
+</body>
+</html>

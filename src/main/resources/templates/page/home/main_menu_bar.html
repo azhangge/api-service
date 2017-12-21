@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<div class="row" style="line-height: 2rem; height: 3rem;" th:fragment="main_menu">
+    <span class="float-left hj-category-title" style="height: 100%;padding-top: 0.35rem;">全部分类</span>
+    <div class="medium-6 columns" style="height: 100%;">
+        <ul class="menu">
+            <li><a href="#">首页</a></li>
+            <li><a th:href="@{/courses}">课程</a></li>
+            <li><a th:href="@{/questionsets}">练习</a></li>
+        </ul>
+    </div>
+    <section class="medium-3 columns" style="height: 100%;">
+        <div class="input-group input-group-rounded">
+            <input class="input-group-field" style="padding: 0.125rem 1rem; height: 1.8rem;" type="search"/>
+            <div class="input-group-button">
+                <input type="submit" class="button secondary" value="搜索"
+                       style="margin-bottom: 0;height: 1.8rem;vertical-align: middle; padding: 0.45em 1em;"
+                       onclick="search()"/>
+            </div>
+        </div>
+    </section>
+</div>
+
+</html>

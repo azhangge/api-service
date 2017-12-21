@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Title</title>
+    <link rel="stylesheet" href="http://dhbhdrzi4tiry.cloudfront.net/cdn/sites/foundation.min.css"/>
+    <link rel="stylesheet" th:href="@{/static/lib/foundation/css/foundation-icons.css}"/>
+    <link rel="stylesheet" th:href="@{/static/lib/fontawesome/css/font-awesome.css}"/>
+    <link rel="stylesheet" th:href="@{/static/css/course/courselist.css}"/>
+    <link type="text/css" rel="stylesheet" th:href="@{/static/css/public/pagination.css}"/>
+</head>
+<body>
+
+<div th:replace="base/header_for_no_home :: header_bar"></div>
+<div style="background-color: #eeeeee;">
+    <div class="row" style="padding: 1rem 0;">
+        <div class="medium-2 columns">
+            <ul class="vertical menu" style="width: 100%;background-color: white;">
+                <li>
+                    <a href="#" style="font-size: 0.875rem;cursor: default;">账户设置</a>
+                    <ul class="nested vertical menu" style="font-size: 0.75rem;">
+                        <li><a th:href="@{/account/basicinfo/personalinfo}">个人信息</a></li>
+                        <li><a th:href="@{/account/realinfo/realinfo}">实名认证</a></li>
+                        <li><a th:href="@{/account/modifypwd}">账户安全</a></li>
+                        <li><a th:href="@{/teacher/detail}">讲师信息</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a style="font-size: 0.875rem;cursor: default;" th:href="@{/notice/user/list}">我的消息</a>
+                </li>
+                <li>
+                    <a href="#" style="font-size: 0.875rem;cursor: default;">我的课程</a>
+                    <ul class="nested vertical menu" style="font-size: 0.75rem;">
+                        <li>
+                            <a href="/usercenter/operate?type=3">在学课程</a>
+                        </li>
+                        <li><a href="/usercenter/operate?type=2">已购课程</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a th:href="@{/test/answer/list}" style="font-size: 0.875rem;color: red">我的练习</a>
+                </li>
+                <li>
+                    <a href="#" style="font-size: 0.875rem;cursor: default;">我的考试</a>
+                    <ul class="nested vertical menu" style="font-size: 0.75rem;">
+                        <li><a href="/user/examplan/list">考试日程</a></li>
+                        <li><a href="/user/exam/score/list">考试成绩</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#" style="font-size: 0.875rem;cursor: default;">我的收藏</a>
+                    <ul class="nested vertical menu" style="font-size: 0.75rem;">
+                        <li><a href="/usercenter/operate?type=1">课程收藏</a></li>
+                        <li><a href="/usercenter/operate?type=9">题集收藏</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+        <div class="medium-10 columns">
+            <div class="row">
+                <nav aria-label="You are here:" role="navigation">
+                    <ul class="breadcrumbs"
+                        style="background-color: white;margin-bottom: 1rem;padding: 0.5rem 0.875rem;font-size: 1.25rem;">
+                        <li><a href="#">我的课程</a></li>
+                        <li><a href="#">已购课程</a></li>
+                    </ul>
+                </nav>
+            </div>
+            <div class="row" style="background-color: white;margin-bottom: 4rem;">
+                <div class="row" style="text-align: center;margin-bottom: 1rem;padding-top: 4rem;">
+                    <h5 th:text="${result.name}">题集名称</h5>
+                </div>
+                <div class="row" style="padding: 2rem 4rem;">
+                    <ol type="1" start="1">
+                        <div class="columns" th:each="question:${result.questions}">
+                            <div class="polls" th:if="${question.type eq 1}" style="margin-top: 20px">
+                                <li>
+                                    <h5 class="polls-question">
+                                        <span th:if="${question.isRight eq true}"
+                                              style="background-color: green">正确</span>
+                                        <span th:if="${question.isRight eq false}"
+                                              style="background-color: red">错误</span>
+                                        <span class="polls-question-label" style="font-size: 1rem;"
+                                              th:text="${question.statement}"></span>
+                                    </h5>
+                                </li>
+                                <div class="polls-options">
+                                    <div th:if="${question.contextA ne null}">
+                                        A:<span th:text="${question.contextA}"></span>
+                                    </div>
+                                    <div th:if="${question.contextB ne null}">
+                                        B:<span th:text="${question.contextB}"></span>
+                                    </div>
+                                    <div th:if="${question.contextC ne null}">
+                                        C:<span th:text="${question.contextC}"></span>
+                                    </div>
+                                    <div th:if="${question.contextD ne null}">
+                                        D:<span th:text="${question.contextD}"></span>
+                                    </div>
+                                    <div th:if="${question.contextE ne null}">
+                                        E:<span th:text="${question.contextE}"></span>
+                                    </div>
+                                    <div th:if="${question.contextF ne null}">
+                                        F:<span th:text="${question.contextF}"></span>
+                                    </div>
+                                    <div th:if="${question.contextG ne null}">
+                                        G:<span th:text="${question.contextG}"></span>
+                                    </div>
+                                    <div th:if="${question.contextH ne null}">
+                                        H:<span th:text="${question.contextH}"></span>
+                                    </div>
+                                </div>
+                                <div style="margin-top: 10px">
+                                    <span style="color: green;font-size: 18px;">正确答案：</span>
+                                    <span th:text="${question.answer}"></span>
+                                    <span style="color: blue;font-size: 18px;margin-left: 50px">你的答案：</span>
+                                    <span th:if="${#strings.isEmpty(question.userAnswer) eq false}" th:text="${question.userAnswer}"></span>
+                                    <span th:if="${#strings.isEmpty(question.userAnswer) eq true}">未作答</span>
+                                    <br/>
+                                    <span style="color: blue;font-size: 18px;">解析：</span>
+                                    <span th:if="${#strings.isEmpty(question.analysis) eq false}" th:text="${question.analysis}"></span>
+                                    <span th:if="${#strings.isEmpty(question.analysis) eq true}">无</span>
+                                </div>
+                            </div>
+
+                            <div class="polls" th:if="${question.type eq 2}"  style="margin-top: 20px">
+                                <li>
+                                    <h5 class="polls-question">
+                                        <span th:if="${question.isRight eq true}"
+                                              style="background-color: green">正确</span>
+                                        <span th:if="${question.isRight eq false}"
+                                              style="background-color: red">错误</span>
+                                        <span class="polls-question-label" style="font-size: 1rem;"
+                                              th:text="${question.statement}">
+                                        </span>
+                                    </h5>
+                                </li>
+                                <div class="polls-options">
+                                    <div th:if="${question.contextA ne null}">
+                                        A:<span th:text="${question.contextA}"></span>
+                                    </div>
+                                    <div th:if="${question.contextB ne null}">
+                                        B:<span th:text="${question.contextB}"></span>
+                                    </div>
+                                    <div th:if="${question.contextC ne null}">
+                                        C:<span th:text="${question.contextC}"></span>
+                                    </div>
+                                    <div th:if="${question.contextD ne null}">
+                                        D:<span th:text="${question.contextD}"></span>
+                                    </div>
+                                    <div th:if="${question.contextE ne null}">
+                                        E:<span th:text="${question.contextE}"></span>
+                                    </div>
+                                    <div th:if="${question.contextF ne null}">
+                                        F:<span th:text="${question.contextF}"></span>
+                                    </div>
+                                    <div th:if="${question.contextG ne null}">
+                                        G:<span th:text="${question.contextG}"></span>
+                                    </div>
+                                    <div th:if="${question.contextH ne null}">
+                                        H:<span th:text="${question.contextH}"></span>
+                                    </div>
+                                </div>
+                                <div style="margin-top: 10px">
+                                    <span style="color: green;font-size: 18px;">正确答案：</span>
+                                    <span th:text="${question.answer}"></span>
+                                    <span style="color: blue;font-size: 18px;margin-left: 50px">你的答案：</span>
+                                    <span th:if="${#strings.isEmpty(question.userAnswer) eq false}" th:text="${question.userAnswer}"></span>
+                                    <span th:if="${#strings.isEmpty(question.userAnswer) eq true}">未作答</span>
+                                    <br/>
+                                    <span style="color: blue;font-size: 18px;">解析：</span>
+                                    <span th:if="${#strings.isEmpty(question.analysis) eq false}" th:text="${question.analysis}"></span>
+                                    <span th:if="${#strings.isEmpty(question.analysis) eq true}">无</span>
+                                </div>
+                            </div>
+
+                            <div class="polls" th:if="${question.type eq 3}"  style="margin-top: 20px">
+                                <li>
+                                    <h5 class="polls-question">
+                                        <span th:if="${question.isRight eq true}" style="background-color: green">正确</span>
+                                        <span th:if="${question.isRight eq false}" style="background-color: red">错误</span>
+                                        <span class="polls-question-label" style="font-size: 1rem;"
+                                              th:text="${question.statement}">
+                                        </span>
+                                    </h5>
+                                </li>
+                                <div class="polls-options">
+                                    <div>
+                                        A:<span>正确</span>
+                                    </div>
+                                    <div>
+                                        B:<span>错误</span>
+                                    </div>
+                                </div>
+                                <div style="margin-top: 10px">
+                                    <span style="color: green;font-size: 18px;">正确答案：</span>
+                                    <span th:text="${question.answer}"></span>
+                                    <span style="color: blue;font-size: 18px;margin-left: 50px">你的答案：</span>
+                                    <span th:if="${#strings.isEmpty(question.userAnswer) eq false}" th:text="${question.userAnswer}"></span>
+                                    <span th:if="${#strings.isEmpty(question.userAnswer) eq true}">未作答</span>
+                                    <br/>
+                                    <span style="color: blue;font-size: 18px;">解析：</span>
+                                    <span th:if="${#strings.isEmpty(question.analysis) eq false}" th:text="${question.analysis}"></span>
+                                    <span th:if="${#strings.isEmpty(question.analysis) eq true}">无</span>
+                                </div>
+                            </div>
+                        </div>
+                    </ol>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<div th:replace="base/footer :: foot_section"></div>
+<div th:replace="base/common_js_imports :: commonjs"></div>
+
+</body>
+</html>

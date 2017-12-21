@@ -1,0 +1,221 @@
+<!doctype html>
+<html class="no-js" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>华杰云教育</title>
+
+    <div th:include="base/common_css_imports :: commoncss"></div>
+    <style>
+        .fav {
+        }
+    </style>
+</head>
+<body>
+
+<div th:replace="base/header_for_no_home :: header_bar"></div>
+<div style="background-color: #F2F2F2;padding-bottom: 4rem;">
+    <div class="row">
+        <nav aria-label="You are here:" role="navigation">
+            <ul class="breadcrumbs" style="margin: 1.5rem 0 1.5rem ;">
+                <li><a th:href="@{/}">首页</a></li>
+                <li><a th:href="@{/questionsets}">练习</a></li>
+            </ul>
+        </nav>
+    </div>
+    <div class="row" style="background-color: white;margin-bottom: 4rem;">
+        <div class="row" style="text-align: center;margin-bottom: 1rem;padding-top: 4rem;">
+            <h5 th:text="${result.name}">考试名称</h5>
+        </div>
+        <div class="row" style="padding: 2rem 4rem;">
+            <ol type="1" start="1">
+                <div th:each="species:${result.species}">
+                    <div th:if="${species.type eq 1}">
+                        <span style="font-weight: bold">一:单选题</span>
+                        (<span th:text="${species.speciesScore}"></span>分，
+                        共<span th:text="${species.questionNum}"></span>题，
+                        每题<span th:text="${species.speciesScore/species.questionNum}"></span>分)
+                    </div>
+                </div>
+                <!--单选-->
+                <div class="columns" th:each="question:${result.questions}" style="margin-top: 5px">
+                    <div class="polls" th:if="${question.type eq 1}">
+                        <li>
+                            <h5 class="polls-question">
+                            <span class="polls-question-label" style="font-size: 1rem;"
+                                  th:text="${question.statement}"></span>
+                            </h5>
+                        </li>
+                        <div class="polls-options">
+                            <div th:if="${question.contextA ne null}">
+                                <input type="radio" th:name="${question.questionId}" th:id="${'A'+ question.questionId}"
+                                       th:value="A"/>
+                                A:<label th:for="${'A'+ question.questionId}" th:text="${question.contextA}"></label>
+                            </div>
+                            <div th:if="${question.contextB ne null}">
+                                <input type="radio" th:name="${question.questionId}" th:id="${'B'+ question.questionId}"
+                                       th:value="B"/>
+                                B:<label th:for="${'B'+ question.questionId}" th:text="${question.contextB}"></label>
+                            </div>
+                            <div th:if="${question.contextC ne null}">
+                                <input type="radio" th:name="${question.questionId}" th:id="${'C'+ question.questionId}"
+                                       th:value="C"/>
+                                C:<label th:for="${'C'+ question.questionId}" th:text="${question.contextC}"></label>
+                            </div>
+                            <div th:if="${question.contextD ne null}">
+                                <input type="radio" th:name="${question.questionId}" th:id="${'D'+ question.questionId}"
+                                       th:value="D"/>
+                                D:<label th:for="${'D'+ question.questionId}" th:text="${question.contextD}"></label>
+                            </div>
+                            <div th:if="${question.contextE ne null}">
+                                <input type="radio" th:name="${question.questionId}" th:id="${'E'+ question.questionId}"
+                                       th:value="E"/>
+                                E:<label th:for="${'E'+ question.questionId}" th:value="E"
+                                         th:text="${question.contextE}"></label>
+                            </div>
+                            <div th:if="${question.contextF ne null}">
+                                <input type="radio" th:name="${question.questionId}" th:id="${'F'+ question.questionId}"
+                                       th:value="F"/>
+                                F:<label th:for="${'F'+ question.questionId}" th:text="${question.contextF}"></label>
+                            </div>
+                            <div th:if="${question.contextG ne null}">
+                                <input type="radio" th:name="${question.questionId}" th:id="${'G'+ question.questionId}"
+                                       th:value="G"/>
+                                G:<label th:for="${'G'+ question.questionId}" th:text="${question.contextG}"></label>
+                            </div>
+                            <div th:if="${question.contextH ne null}">
+                                <input type="radio" th:name="${question.questionId}" th:id="${'H'+ question.questionId}"
+                                       th:value="H"/>
+                                H:<label th:for="${'H'+ question.questionId}" th:text="${question.contextH}"></label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--多选-->
+                <div th:each="species:${result.species}">
+                    <div th:if="${species.type eq 2}">
+                        <span style="font-weight: bold">二:多选题</span>
+                        (<span th:text="${species.speciesScore}"></span>分，
+                        共<span th:text="${species.questionNum}"></span>题，
+                        每题<span th:text="${species.speciesScore/species.questionNum}"></span>分)
+                    </div>
+                </div>
+                <div class="columns" th:each="question:${result.questions}" style="margin-top: 5px">
+                    <div class="polls" th:if="${question.type eq 2}">
+                        <li>
+                            <h5 class="polls-question">
+                            <span class="polls-question-label" style="font-size: 1rem;"
+                                  th:text="${question.statement}"></span>
+                            </h5>
+                        </li>
+                        <div class="polls-options">
+                            <div th:if="${question.contextA ne null}">
+                                <input type="checkbox" th:name="${question.questionId}"
+                                       th:id="${'A'+ question.questionId}"
+                                       th:value="A"/>
+                                A:<label th:for="${'A'+ question.questionId}" th:text="${question.contextA}"></label>
+                            </div>
+                            <div th:if="${question.contextB ne null}">
+                                <input type="checkbox" th:name="${question.questionId}"
+                                       th:id="${'B'+ question.questionId}"
+                                       th:value="B"/>
+                                B:<label th:for="${'B'+ question.questionId}" th:text="${question.contextB}"></label>
+                            </div>
+                            <div th:if="${question.contextC ne null}">
+                                <input type="checkbox" th:name="${question.questionId}"
+                                       th:id="${'C'+ question.questionId}"
+                                       th:value="C"/>
+                                C:<label th:for="${'C'+ question.questionId}" th:text="${question.contextC}"></label>
+                            </div>
+                            <div th:if="${question.contextD ne null}">
+                                <input type="checkbox" th:name="${question.questionId}"
+                                       th:id="${'D'+ question.questionId}"
+                                       th:value="D"/>
+                                D:<label th:for="${'D'+ question.questionId}" th:text="${question.contextD}"></label>
+                            </div>
+                            <div th:if="${question.contextE ne null}">
+                                <input type="checkbox" th:name="${question.questionId}"
+                                       th:id="${'E'+ question.questionId}"
+                                       th:value="E"/>
+                                E:<label th:for="${'E'+ question.questionId}" th:text="${question.contextE}"></label>
+                            </div>
+                            <div th:if="${question.contextF ne null}">
+                                <input type="checkbox" th:name="${question.questionId}"
+                                       th:id="${'F'+ question.questionId}"
+                                       th:value="F"/>
+                                F:<label th:for="${'F'+ question.questionId}" th:text="${question.contextF}"></label>
+                            </div>
+                            <div th:if="${question.contextG ne null}">
+                                <input type="checkbox" th:name="${question.questionId}"
+                                       th:id="${'G'+ question.questionId}"
+                                       th:value="G"/>
+                                G:<label th:for="${'G'+ question.questionId}" th:text="${question.contextG}"></label>
+                            </div>
+                            <div th:if="${question.contextH ne null}">
+                                <input type="checkbox" th:name="${question.questionId}"
+                                       th:id="${'H'+ question.questionId}"
+                                       th:value="H"/>
+                                H:<label th:for="${'H'+ question.questionId}" th:text="${question.contextH}"></label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--判断-->
+                <div th:each="species:${result.species}">
+                    <div th:if="${species.type eq 3}">
+                        <span style="font-weight: bold">三:判断题</span>
+                        (<span th:text="${species.speciesScore}"></span>分，
+                        共<span th:text="${species.questionNum}"></span>题，
+                        每题<span th:text="${species.speciesScore/species.questionNum}"></span>分)
+                    </div>
+                </div>
+                <div class="columns" th:each="question:${result.questions}" style="margin-top: 5px">
+                    <div class="polls" th:if="${question.type eq 3}">
+                        <li>
+                            <h5 class="polls-question">
+                            <span class="polls-question-label" style="font-size: 1rem;"
+                                  th:text="${question.statement}"></span>
+                            </h5>
+                        </li>
+                        <div class="polls-options">
+                            <div>
+                                <input type="radio" th:name="${question.questionId}" th:id="${'A'+ question.questionId}"
+                                       th:value="A"/>
+                                A:<label th:for="${'A'+ question.questionId}">正确</label>
+                            </div>
+                            <div>
+                                <input type="radio" th:name="${question.questionId}" th:id="${'B'+ question.questionId}"
+                                       th:value="B"/>
+                                B:<label th:for="${'B'+ question.questionId}">错误</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </ol>
+        </div>
+        <div class="row" style="text-align: center;padding-bottom: 2rem;">
+            <input type="button" class="button" value="提交" onclick="submit()"/>
+        </div>
+    </div>
+
+</div>
+
+<div th:replace="base/login_form :: login_form"></div>
+
+<div th:replace="base/common_js_imports :: commonjs"></div>
+<script type="text/javascript" th:src="@{/static/js/exam/exam.js}"></script>
+<script th:inline="javascript">
+    var questionSet = {};
+    questionSet.questionSetId = [[${result.questionSetId}]];
+    questionSet.questionSetInsId = [[${result.questionSetInsId}]];
+    questionSet.questionSetType = [[${result.type}]];
+    questionSet.questions = [[${result.questions}]];
+    $(document).ready(function () {
+        getQuestionSet(questionSet);
+    });
+    $(document).foundation();
+</script>
+</body>
+</html>
+
+

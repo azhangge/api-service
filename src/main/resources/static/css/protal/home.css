@@ -1,0 +1,132 @@
+
+
+.input-group-rounded .input-group-field {
+    border-radius: 1.5rem 0 0 1.5rem;
+    padding-left: 1rem;
+}
+
+.input-group-rounded .input-group-button .button {
+    border-radius: 0 1.5rem 1.5rem 0;
+    font-size: 0.8rem;
+
+}
+
+.hj-category-title {
+    background: #4BB9F3;
+    width: 224px;
+    color: #FFFFFF;
+    letter-spacing: 2px;
+    text-align: center;
+    display: inline-block;
+}
+
+.news-image-gallery-container {
+    background-color: #fefefe;
+}
+
+.course-title-row {
+    padding: 0rem 1.5rem 0rem 3rem;
+    margin-top: 1.5rem;
+}
+
+.course-category-title-main {
+    font-size: 1.5rem;
+    margin-right: 1rem;
+    color: #333;
+}
+
+.course-category-title-sub {
+    font-size: 0.875rem;
+    margin-right: 1rem;
+    color: #666;
+}
+
+.title-more {
+    margin-top: 0.75rem;
+    font-size: 0.875rem;
+    color: #666;
+}
+
+.course-item-container {
+    padding-top: 12px;
+    height: 240px;
+}
+
+.course-name {
+    padding-left: 0.825rem;
+}
+
+.course-item-info-row {
+    padding: 0 0.825rem;
+
+}
+.category-menu-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 405px;
+    width: 224px;
+    background-color: rgba(46, 42, 42, .9);
+    padding: 0.5rem 0;
+}
+
+.category-menu-main {
+    padding: 0 1rem;
+}
+
+.category-menu-main > h5 {
+    border-bottom: 1px solid rgba(255, 255, 255, .04);
+    margin-bottom: 0.125rem;
+}
+
+.category-menu-main:hover {
+    color: black;
+    background-color: white;
+    border-bottom: 1px solid #3adb76;
+    border-top: 1px solid #3adb76;
+}
+
+.category-menu-sub-container {
+    width: 24rem;
+    height: 405px;
+    position: absolute;
+    top: 0;
+    left: 224px;
+    visibility: hidden;
+    background-color: white;
+}
+
+.category-menu-main:hover > .category-menu-sub-container {
+    visibility: visible;
+    z-index: 10;
+    color: black;
+    border: 1px solid #3adb76;
+    border-left: none;
+    padding: 1rem 2rem;
+}
+
+.category-menu-sub {
+    text-decoration: none;
+    color: #000;
+    font-size: 0.725rem;
+    margin-right: 1rem;
+}
+
+.category-menu-sub:hover {
+    color: #3adb76;
+}
+
+.user-login-info-container {
+    width: 214px;
+    height: 315px;
+    position: absolute;
+    top: 45px;
+    right: 50%;
+    margin-right: -48%;
+    background-color: white;
+    border-radius: 5px;
+    text-align: center;
+    vertical-align: middle;
+}
+
+

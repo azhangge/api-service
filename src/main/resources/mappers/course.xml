@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.huajie.educomponent.course.mapper.CourseBasicMapper">
+    <!--
+                <sql></sql>
+                <resultMap></resultMap>
+     -->
+    <select id="selectCourseBrief" parameterType="hashmap" resultType="com.huajie.educomponent.course.entity.CourseBriefEntity">
+        SELECT course.id as id,
+        course.deleted as deleted,
+        course.name as name,
+        course.thumbnail_id as thumbnail_id,
+        course.teacher_id as teacher_id,
+        creator.teacher_name as teacher_name,
+        course.access_count as access_count
+            FROM course_basic as course,
+                LEFT JOIN account_user_real_info as creator ON (course.teacher_id = creator.id)
+            WHERE
+                course.deleted=0
+                <if test="main_category_id != null">
+                    AND course.main_category_id=#{main_category_id}
+                </if>
+                <if test="main_category_ids != null">
+                    AND course.main_category_id in
+                    <foreach collection="main_category_ids" item="item"  open="(" separator="," close=")">
+                        #{item}
+                    </foreach>
+                </if>
+                <if test="sub_category_id != null">
+                    AND course.sub_category_id=#{main_category_id}
+                </if>
+                <if test="sub_category_ids != null">
+                    AND course.sub_category_id in
+                        <foreach collection="sub_category_ids" item="item"  open="(" separator="," close=")">
+                            #{item}
+                        </foreach>
+                </if>
+                <if test="detail_category_id != null">
+                    AND course.detail_category_id=#{main_category_id}
+                </if>
+                <if test="detail_category_ids != null">
+                    AND course.detail_category_id in
+                    <foreach collection="detail_category_ids" item="item"  open="(" separator="," close=")">
+                        #{item}
+                    </foreach>
+                </if>
+                <if test="teacher_id != null">
+                    AND course.teacher_id=#{teacher_id}
+                </if>
+                <if test="public != null">
+                    AND course.public=#{public}
+                </if>
+                <if test="on_shelves != null">
+                    AND course.on_shelves=#{on_shelves}
+                </if>
+
+                <if test="order_col!= null and order_key != null">
+                    ORDER BY #{order_col} #{order_key}
+                </if>
+
+                <if test="page_offset!= null and page_size != null">
+                    LIMIT #{page_offset}, #{page_size}
+                </if>
+    </select>
+
+
+    <select id="countCourses" parameterType="hashmap" resultType="Long">
+        SELECT COUNT(*)
+        FROM course_basic
+        WHERE
+        course.deleted=0
+        <if test="main_category_id != null">
+            AND course.main_category_id=#{main_category_id}
+        </if>
+        <if test="main_category_ids != null">
+            AND course.main_category_id in
+            <foreach collection="main_category_ids" item="item"  open="(" separator="," close=")">
+                #{item}
+            </foreach>
+        </if>
+        <if test="sub_category_id != null">
+            AND course.sub_category_id=#{main_category_id}
+        </if>
+        <if test="sub_category_ids != null">
+            AND course.sub_category_id in
+            <foreach collection="sub_category_ids" item="item"  open="(" separator="," close=")">
+                #{item}
+            </foreach>
+        </if>
+        <if test="detail_category_id != null">
+            AND course.detail_category_id=#{main_category_id}
+        </if>
+        <if test="detail_category_ids != null">
+            AND course.detail_category_id in
+            <foreach collection="detail_category_ids" item="item"  open="(" separator="," close=")">
+                #{item}
+            </foreach>
+        </if>
+        <if test="teacher_id != null">
+            AND course.teacher_id=#{teacher_id}
+        </if>
+        <if test="public != null">
+            AND course.public=#{public}
+        </if>
+        <if test="on_shelves != null">
+            AND course.on_shelves=#{on_shelves}
+        </if>
+    </select>
+
+</mapper>
+

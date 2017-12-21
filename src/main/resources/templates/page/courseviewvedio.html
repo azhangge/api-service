@@ -1,0 +1,142 @@
+<!doctype html>
+<html class="no-js" lang="en"
+      xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>华杰云教育</title>
+
+    <div th:include="base/common_css_imports :: commoncss"></div>
+    <link rel="stylesheet" th:href="@{/static/css/public/star-rating.css}"/>
+    <link rel="stylesheet" th:href="@{/static/css/course/coursevideoview.css}"/>
+    <style>
+        .video_playing {
+            color: deepskyblue;
+        }
+    </style>
+</head>
+<body>
+<!-- Start Top Bar -->
+<div th:replace="base/header_for_no_home :: header_bar"></div>
+
+<div class="row columns">
+    <nav aria-label="You are here:" role="navigation">
+        <ul class="breadcrumbs">
+            <li><a th:href="@{'/'}">首页</a></li>
+            <li><a th:href="@{'/courses'}">课程</a></li>
+        </ul>
+    </nav>
+</div>
+
+<div class="featured-article-side-links" style="margin-bottom: 1.5rem;">
+    <div class="row collapse">
+        <!-- big feature -->
+        <div class="small-12 medium-8 columns">
+            <div class="featured-article-big" style="padding: 0;">
+                <video id="my-video" class="video-js" autoplay="autoplay" controls="" preload="auto" width="100%"
+                       height="450"
+                       th:poster="${course.thumbnailPath}" data-setup="{}" th:src="${courseWarePath}">
+                    <source th:id="videoPath" type='video/mp4'/>
+                    <p class="vjs-no-js">
+                        To view this video please enable JavaScript, and consider upgrading to a web browser that
+                        <a href="http://videojs.com/html5-video-support/" target="_blank">supports HTML5 video</a>
+                    </p>
+                </video>
+            </div>
+        </div>
+
+        <!-- side links -->
+        <div class="small-12 medium-4 columns featured-article-links-container">
+            <div class="featured-article-links-container-title-row">
+                <span class="featured-article-links-container-title">目录</span>
+            </div>
+            <div th:each="chapter:${course.chapters}">
+                <div class="featured-article-links-header">
+                    <div class="featured-article-links-chapter" th:text="${chapter.name}">
+                    </div>
+                    <div class="featured-article-links" th:each="chapter_sub:${chapter.children}">
+                        <span th:if="${coursewareid != chapter_sub.resourceId}" th:text="${chapter_sub.name}"
+                              th:value="${chapter_sub.resourcePath}"
+                              th:id="${chapter_sub.resourceId}" onclick="switchVideo(event, currCoursewareId)"></span>
+                        <span th:if="${coursewareid == chapter_sub.resourceId}" th:text="${chapter_sub.name}"
+                              th:value="${chapter_sub.resourcePath}"
+                              th:id="${chapter_sub.resourceId}" onclick="switchVideo(event, currCoursewareId)"
+                              class="video_playing"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div th:replace="base/login_form :: login_form"></div>
+<div th:replace="base/footer :: foot_section"></div>
+
+<div th:replace="base/common_js_imports :: commonjs"></div>
+<script th:src="@{/static/js/base/star-rating.js}"></script>
+<script th:src="@{/static/js/course/courseDetail.js}"></script>
+<script th:inline="javascript">
+    var currCoursewareId = [[${coursewareid}]];
+    var lastStudyTime = [[${lastStudyTime}]];
+</script>
+<script type="text/javascript">
+    $(document).foundation();
+
+    function switchVideo(event) {
+        var target = event.target;
+        var switchPath = $("#" + target.id).attr("value");
+        $("#videoPath").prop("src", switchPath);
+
+        $("#" + currCoursewareId).removeClass("video_playing");
+        currCoursewareId = target.id;
+        $("#" + currCoursewareId).addClass("video_playing");
+        document.getElementById("my-video").src = switchPath;
+        document.getElementById("my-video").play();
+    }
+
+    var myVid=document.getElementById("my-video");
+    myVid.currentTime = lastStudyTime;
+
+    var currentTime = 0;
+    var duration = 0;
+
+    $("#my-video").on("timeupdate", function (event) {
+        currentTime = this.currentTime;
+        duration = this.duration;
+    });
+
+    window.setInterval(function () {
+        updateLearningTime(currCoursewareId, currentTime)
+    }, 3000);
+
+    if (currentTime == this.duration) {
+        updateLearningTime(currCoursewareId, parseInt(currentTime));
+    }
+
+    function updateLearningTime(Id, currentTime) {
+        var bo = {};
+        bo.studyTime = currentTime;
+        bo.chapterId = Id;
+        $.ajax({
+                url: '/stat/update/study',
+                type: 'POST',
+                contentType: "application/json",
+                dataType: "json",
+                data: JSON.stringify(bo),
+                error: function (e) {
+                    window.console.log("同步出错" + e.value);
+                },
+                success: function () {
+                    window.console.log("同步成功" + currentTime);
+                }
+            }
+        )
+    }
+
+</script>
+</body>
+</html>
+
+
+    

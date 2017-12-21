@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+
+<div class="reveal" id="login_form" data-reveal="" style="border: none; padding: 0;outline: none; position: relative;"
+     th:fragment="login_form">
+    <form>
+        <div class="sign-in-form">
+            <h4 class="text-center">账户登陆</h4>
+            <label for="login_username">用户名</label>
+            <input type="text" class="sign-in-form-username" id="login_username"/>
+            <label for="login_password">密码</label>
+            <input type="password" class="sign-in-form-password" id="login_password"/>
+            <button type="submit" class="sign-in-form-button" onclick="login();">登陆</button>
+        </div>
+    </form>
+    <button class="close-button" data-close="" aria-label="Close modal" type="button">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+</html>

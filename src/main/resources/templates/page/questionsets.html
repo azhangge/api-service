@@ -1,0 +1,115 @@
+<!doctype html>
+<html class="no-js"
+      xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>华杰云教育</title>
+
+    <div th:include="base/common_css_imports :: commoncss"></div>
+    <link type="text/css" rel="stylesheet" th:href="@{/static/css/questionset/questionsetlist.css}"/>
+    <link rel="stylesheet" th:href="@{/static/css/public/loading.css}"/>
+</head>
+<body>
+
+<div th:replace="base/header_for_no_home :: header_bar"></div>
+<div style="background-color: #F2F2F2">
+    <div class="row">
+        <nav aria-label="You are here:" role="navigation">
+            <ul class="breadcrumbs" style="margin: 2rem 0 2rem ;">
+                <li><a th:href="@{/}">首页</a></li>
+                <li><a href="#">练习</a></li>
+            </ul>
+        </nav>
+    </div>
+
+    <div class="row">
+        <div class="medium-2 columns ">
+            <span class="course-sort-type-title">排序</span>
+            <div id="sort-time" class="course-sort-type-container" onclick="sortByOrder()">
+                <a class="course-sort-type-title">上架时间</a>
+                <span class="fa fa-sort-asc course-sort-asc" style="top: 0.3rem;"></span>
+                <span class="fa fa-sort-desc course-sort-desc" style="top: 0.35rem;"></span>
+            </div>
+        </div>
+        <div class="medium-7 columns ">
+            <span class="course-sort-type-title">过滤</span>
+            <div class="course-sort-type-container">
+                <a id="all-type" class="course-sort-type-title" style="margin-right: 0.25rem;"
+                   onclick="allType()">不限</a>
+                <a id="test-type" class="course-sort-type-title" style="margin-right: 0.25rem;"
+                   onclick="testType()">题集</a>
+                <a id="paper-type" class="course-sort-type-title" style="margin-right: 0.25rem;"
+                   onclick="paperType()">套卷</a>
+            </div>
+        </div>
+        <div class="medium-3 columns">
+            <div class="input-group input-group-rounded" style="margin-bottom: 0">
+                <input class="input-group-field" style="padding: 0.25rem 1rem; height: 1.8rem;" type="search"/>
+                <div class="input-group-button">
+                    <input type="submit" class="button secondary" style="height: 1.8rem;padding: 0.5rem 1rem;"
+                           value="搜索"
+                           onclick="queryKeyWord()"/>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="question-content-list" class="row" style="background-color: white;padding: 1.5rem 1rem;">
+        <a class="row " style="display: block;padding: 0.5rem 1rem;" th:each="questionset:${result.items}"
+           th:href="@{'/questionsets/'+${questionset.questionSetId}}">
+            <div class="medium-6 columns">
+                <span style="font-size: 1.125rem;color: black;" th:if="${questionset.name ne null}" th:text="${questionset.name}"></span>
+            </div>
+            <div class="medium-2 columns text-center">
+                <span style="font-size: 0.75rem; color: #999;" th:if="${questionset.type == 1}">题集</span>
+                <span style="font-size: 0.75rem; color: #999;" th:if="${questionset.type == 2}">套卷</span>
+            </div>
+            <div class="medium-2 columns text-center">
+                <span style="font-size: 0.75rem; color: #999;" th:text="${questionset.creatorName}"></span>
+            </div>
+            <div class="medium-2 columns text-center">
+                <span style="font-size: 0.75rem; color: #999;"
+                      th:text="${#dates.format(questionset.createDate,'yyyy-MM-dd')}">上架时间</span>
+            </div>
+            <div class="medium-12 columns">
+                <p style="font-size: 0.875rem;color: #999;margin-top:0.5rem;margin-bottom:0rem; padding-bottom:0.5rem; border-bottom: 1px solid #e9e9e9;" th:if="${questionset.descriptions eq null}">无</p>
+                <p style="font-size: 0.875rem;color: #999;margin-top:0.5rem;margin-bottom:0rem; padding-bottom:0.5rem; border-bottom: 1px solid #e9e9e9;" th:if="${questionset.descriptions ne null}" th:text="${questionset.descriptions}"></p>
+            </div>
+        </a>
+    </div>
+
+    <div class="row">
+        <div id="page" class="float-right page_div"></div>
+    </div>
+</div>
+
+<div th:replace="base/login_form :: login_form"></div>
+<div th:replace="base/footer :: foot_section"></div>
+
+<div th:replace="base/common_js_imports :: commonjs"></div>
+<script type="text/javascript" th:src="@{/static/js/questionset/questionSetSearch.js}"></script>
+<script type="text/javascript" th:src="@{/static/js/base/loading.js}"></script>
+<script th:inline="javascript">
+    var total = [[${result.total}]];
+    pageInit(total);
+</script>
+<script>
+    $(document).foundation();
+    $(document).ready(function () {
+        $("#all-type").addClass("question-set-type-active");
+        $("#sort-time" + " .course-sort-desc").addClass("question-set-type-active");
+    });
+</script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+

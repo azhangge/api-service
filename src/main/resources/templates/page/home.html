@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <div th:include="base/common_css_imports :: commoncss"></div>
+
+    <link rel="stylesheet" th:href="@{/static/css/protal/home.css}"/>
+</head>
+<body>
+
+<div th:replace="base/header :: header_bar"></div>
+<div th:replace="page/home/main_menu_bar :: main_menu"></div>
+<div th:replace="page/home/scroll_bar :: scroll_bar"></div>
+<div th:replace="page/home/prompt_courses :: prompt_section"></div>
+<div th:replace="page/home/category_courses :: category_course"></div>
+<div th:replace="base/login_form :: login_form"></div>
+<div th:replace="base/register_form :: register_form"></div>
+<div th:replace="base/footer :: foot_section"></div>
+
+<div th:replace="base/common_js_imports :: commonjs"></div>
+<script>
+    $(document).foundation();
+</script>
+</body>
+</html>

@@ -1,0 +1,42 @@
+<!doctype html>
+<html class="no-js" lang="en"
+      xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>华杰云教育</title>
+
+    <div th:include="base/common_css_imports :: commoncss"></div>
+    <link rel="stylesheet" th:href="@{/static/css/public/star-rating.css}"/>
+    <link rel="stylesheet" th:href="@{/static/css/course/coursevideoview.css}"/>
+</head>
+<body>
+<!-- Start Top Bar -->
+<div th:replace="base/header_for_no_home :: header_bar"></div>
+
+<div class="row columns">
+    <nav aria-label="You are here:" role="navigation">
+        <ul class="breadcrumbs">
+            <li><a href="/">首页</a></li>
+            <li><a th:href="@{'/course'}">课程</a></li>
+        </ul>
+    </nav>
+</div>
+
+<div style="width: 1500px;height: 800px;margin:auto;text-align: center">
+    <iframe th:src="${resourceHtmlPath}" style="border: solid;width:90%;height:90%;margin:0 auto">
+
+    </iframe>
+</div>
+
+<div th:replace="base/footer :: foot_section"></div>
+
+<div th:replace="base/common_js_imports :: commonjs"></div>
+<script>
+
+</script>
+</body>
+</html>
+
+

@@ -1,0 +1,57 @@
+.sign-in-form {
+    padding: 1.5rem 4rem;
+    background-color: #ffffff;
+    color: black;
+}
+
+.sign-in-form h4 {
+    margin-bottom: 1rem;
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+.sign-in-form label {
+    text-transform: uppercase;
+    color: #0f9ae0;
+    letter-spacing: 1px;
+    font-weight: 600;
+    margin-bottom: 1rem;
+}
+
+.sign-in-form input {
+    color: black;
+}
+
+.sign-in-form input:focus {
+    opacity: .8;
+}
+
+.sign-in-form-username,
+.sign-in-form-password {
+    border-radius: 30px;
+    border: 1px solid black;
+    opacity: .1;
+    transition: all ease .4s;
+}
+
+.sign-in-form-button {
+    border-radius: 30px;
+    border: 1px solid #44c8ed;;
+    background-color: transparent;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    width: 100%;
+    padding: 1rem;
+    transition: all ease .4s;
+}
+
+.sign-in-form-button:hover {
+    background-color: #44c8ed;
+    border-color: #44c8ed;
+}
+
+.sign-in-form-button:disabled {
+    background-color: #eeeeee;
+    border-color: #eeeeee;
+    cursor: not-allowed;
+}

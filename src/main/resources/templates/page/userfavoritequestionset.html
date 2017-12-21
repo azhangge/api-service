@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Title</title>
+    <link rel="stylesheet" href="http://dhbhdrzi4tiry.cloudfront.net/cdn/sites/foundation.min.css"/>
+    <link rel="stylesheet" th:href="@{/static/lib/foundation/css/foundation-icons.css}"/>
+    <link rel="stylesheet" th:href="@{/static/lib/fontawesome/css/font-awesome.css}"/>
+    <link rel="stylesheet" th:href="@{/static/css/course/courselist.css}"/>
+    <link type="text/css" rel="stylesheet" th:href="@{/static/css/public/pagination.css}"/>
+    <link rel="stylesheet" th:href="@{/static/css/public/loading.css}"/>
+</head>
+<body>
+
+<div th:replace="base/header_for_no_home :: header_bar"></div>
+<div style="background-color: #eeeeee;">
+    <div class="row" style="padding: 1rem 0;">
+        <div class="medium-2 columns">
+            <ul class="vertical menu" style="width: 100%;background-color: white;">
+                <li>
+                    <a href="#" style="font-size: 0.875rem;cursor: default;">账户设置</a>
+                    <ul class="nested vertical menu" style="font-size: 0.75rem;">
+                        <li><a th:href="@{/account/basicinfo/personalinfo}">个人信息</a></li>
+                        <li><a th:href="@{/account/realinfo/realinfo}">实名认证</a></li>
+                        <li><a th:href="@{/account/modifypwd}">账户安全</a></li>
+                        <li><a th:href="@{/teacher/detail}">讲师信息</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a style="font-size: 0.875rem;" th:href="@{/notice/user/list}">我的消息</a>
+                </li>
+                <li>
+                    <a href="#" style="font-size: 0.875rem;cursor: default;">我的课程</a>
+                    <ul class="nested vertical menu" style="font-size: 0.75rem;">
+                        <li>
+                            <a href="/usercenter/operate?type=3">在学课程</a>
+                        </li>
+                        <li><a href="/usercenter/operate?type=2">已购课程</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a th:href="@{/test/answer/list}" style="font-size: 0.875rem;">我的练习</a>
+                </li>
+                <li>
+                    <a href="#" style="font-size: 0.875rem;cursor: default;">我的考试</a>
+                    <ul class="nested vertical menu" style="font-size: 0.75rem;">
+                        <li><a href="/user/examplan/list">考试日程</a></li>
+                        <li><a href="/user/exam/score/list">考试成绩</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#" style="font-size: 0.875rem;cursor: default;">我的收藏</a>
+                    <ul class="nested vertical menu" style="font-size: 0.75rem;">
+                        <li><a href="/usercenter/operate?type=1">课程收藏</a></li>
+                        <li><a href="/usercenter/operate?type=9" style="color: red;">题集收藏</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+        <div class="medium-10 columns">
+            <div class="row">
+                <nav aria-label="You are here:" role="navigation">
+                    <ul class="breadcrumbs"
+                        style="background-color: white;margin-bottom: 1rem;padding: 0.5rem 0.875rem;font-size: 1.25rem;">
+                        <li><a href="#">我的收藏</a></li>
+                        <li><a href="/usercenter/operate?type=3">题集收藏</a></li>
+                    </ul>
+                </nav>
+            </div>
+
+            <div th:if="${#arrays.length(result.items)} == 0">
+                <div class="row" style="text-align: center;height: 240px;line-height:240px;background: white;">
+                    <span>您没有收藏任何题集</span>
+                </div>
+            </div>
+            <div th:if="${#arrays.length(result.items)} != 0">
+                <div class="row" name="content" id="user-favorite-question-set" style="background-color: white;">
+                    <div class="row " th:each="questionset:${result.items}"
+                         style="border-bottom: 1px solid #e9e9e9;margin: 1rem 2rem;">
+                        <a class="medium-11 columns" style="padding-left: 0rem;"
+                           th:href="@{'/questionsets/'+${questionset.questionSetId}}">
+                            <div class="medium-8 columns">
+                                <span style="color: black;" th:text="${questionset.name}"></span>
+                            </div>
+                            <div class="medium-2 columns text-center">
+                            <span style="font-size: 0.75rem; color: #999;"
+                                  th:text="${questionset.creatorName}"></span>
+                            </div>
+                            <div class="medium-2 columns text-center">
+                            <span style="font-size: 0.75rem; color: #999;"
+                                  th:text="${#dates.format(questionset.createDate,'yyyy-MM-dd')}"></span>
+                            </div>
+                            <div class="medium-12 columns" style="">
+                                <p style="color: #999;margin: 0;padding-top:0.5rem; padding-bottom:0.5rem; font-size: 0.875rem;"
+                                   th:text="${questionset.descriptions}"></p>
+                            </div>
+                        </a>
+                        <div class="medium-1 columns text-right" style="cursor: pointer">
+                            <i class="fa fa-star" style="color:#3bb4f2;" th:id="${questionset.questionSetId}"
+                               onclick="unFavorite(event)"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div id="page" class="float-right page_div"></div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+</div>
+
+<div th:replace="base/footer :: foot_section"></div>
+<div th:replace="base/common_js_imports :: commonjs"></div>
+<script type="text/javascript" th:src="@{/static/js/useroperate/userfavoritequestionset.js}"></script>
+<script type="text/javascript" th:src="@{/static/js/base/loading.js}"></script>
+<script th:inline="javascript">
+    var total = [[${result.total}]];
+    pageInit(total);
+</script>
+</body>
+</html>

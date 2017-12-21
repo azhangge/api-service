@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>华杰云教育</title>
+
+    <div th:include="base/common_css_imports :: commoncss"></div>
+</head>
+<body>
+
+<div th:replace="base/header_for_no_home :: header_bar"></div>
+<div style="background-color: #eeeeee;">
+    <div class="row" style="padding: 1rem 0;">
+        <div class="medium-2 columns">
+            <ul class="vertical menu" style="width: 100%;background-color: white;">
+                <li>
+                    <a href="#" style="font-size: 0.875rem;cursor: default;">账户设置</a>
+                    <ul class="nested vertical menu" style="font-size: 0.75rem;">
+                        <li><a th:href="@{/account/basicinfo/personalinfo}">个人信息</a></li>
+                        <li><a href="#" style="color: red;">实名认证</a></li>
+                        <li><a th:href="@{/user/security}">账户安全</a></li>
+                        <li><a th:href="@{/teacher/detail}">讲师信息</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a style="font-size: 0.875rem;" th:href="@{/notice/user/list}">我的消息</a>
+                </li>
+                <li>
+                    <a href="#" style="font-size: 0.875rem;cursor: default;">我的课程</a>
+                    <ul class="nested vertical menu" style="font-size: 0.75rem;">
+                        <li>
+                            <a href="/usercenter/operate?type=3">在学课程</a>
+                        </li>
+                        <li><a href="/usercenter/operate?type=2">已购课程</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a th:href="@{/test/answer/list}" style="font-size: 0.875rem;">我的练习</a>
+                </li>
+                <li>
+                    <a href="#" style="font-size: 0.875rem;cursor: default;">我的考试</a>
+                    <ul class="nested vertical menu" style="font-size: 0.75rem;">
+                        <li><a href="/user/examplan/list">考试日程</a></li>
+                        <li><a href="/user/exam/score/list">考试成绩</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#" style="font-size: 0.875rem;cursor: default;">我的收藏</a>
+                    <ul class="nested vertical menu" style="font-size: 0.75rem;">
+                        <li><a href="/usercenter/operate?type=1">课程收藏</a></li>
+                        <li><a href="/usercenter/operate?type=9">题集收藏</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+        <div class="medium-10 columns">
+            <div class="row">
+                <nav aria-label="You are here:" role="navigation">
+                    <ul class="breadcrumbs"
+                        style="background-color: white;margin-bottom: 1rem;padding: 0.5rem 0.875rem;font-size: 1.25rem;">
+                        <li><a href="#">账户设置</a></li>
+                        <li><a th:href="@{/account/realinfo/realinfo}">实名认证</a></li>
+                    </ul>
+                </nav>
+            </div>
+            <div name="content" class="row" style="background-color: white;padding: 2rem 0rem;">
+                <div id="seeUserRealInfo" th:if="${userRealInfoBo} ne null and ${userRealInfoBo.approveStatus} ne 2 ">
+                    <div th:if="${userRealInfoBo.approveStatus} eq 1" style="text-align: center;">
+                        <img th:src="@{/static/image/authentication.png}"/>
+                        <span th:text="已通过实名认证"></span>
+                    </div>
+                    <div th:if="${userRealInfoBo.approveStatus} ne 1" style="text-align: center;">
+                        <img th:src="@{/static/image/unauthentication.png}"/>
+                        <span th:text="实名认证审核中"></span>
+                    </div>
+                    <br/>
+                    <div class="row">
+                        <div class="medium-2 columns text-right end" style="padding-bottom: 2rem;">
+                            <span th:text="您的实名信息" style="font-weight:bold;"></span>
+                        </div>
+                    </div>
+                    <form id="personalInfoFm" style="color: #000;margin-top: 24px;">
+                        <div class="row">
+                            <div class="medium-2 columns text-right">
+                                <label class="right inline" style="color: #8a8a8a;">姓名：</label>
+                            </div>
+                            <div class="medium-4 columns end" style="padding-left: 0;">
+                                <input type="text" placeholder="姓名"
+                                       style="color: #000000;height: 2rem;font-size: 0.875rem;"
+                                       th:id="updUsername"
+                                       th:readonly="readonly"
+                                       th:value="${userRealInfoBo.realName}"/>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="medium-2 columns text-right" style="text-align: right;">
+                                <label class="right inline" style="color: #8a8a8a;">身份证号：</label>
+                            </div>
+                            <div class="medium-4 columns end" style="padding-left: 0;">
+                                <input type="text" placeholder="身份证号"
+                                       style="color: #000000;height: 2rem;font-size: 0.875rem;"
+                                       th:readonly="readonly"
+                                       th:value="${userRealInfoBo.idNo}"/>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="medium-2 columns text-right" style="text-align: right;">
+                                <label class="right inline" style="color: #8a8a8a;">身份证到期时间：</label>
+                            </div>
+                            <div class="medium-4 columns end" style="padding-left: 0;">
+                                <input type="date" style="color: #000000;height: 2rem;font-size: 0.875rem;"
+                                       placeholder="身份证到期时间" th:readonly="readonly"
+                                       th:if="${userRealInfoBo.idEndTime} ne null"
+                                       th:value="${#dates.format(userRealInfoBo.idEndTime,'yyyy-MM-dd')}"/>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="medium-2 columns text-right" style="text-align: right;">
+                                <label class="right inline" style="color: #8a8a8a;">身份证正反面照：</label>
+                            </div>
+                            <div class="medium-4 columns end" style="padding-left: 0;">
+                                <img class="thumbnail course-item-thumbnail" style="width:225px;height: 125px;"
+                                     th:if="${userRealInfoBo.idCardFrontFilePath} ne null"
+                                     th:src="${userRealInfoBo.idCardFrontFilePath}"/>
+                                <img class="thumbnail course-item-thumbnail" style="width:225px;height: 125px;"
+                                     th:if="${userRealInfoBo.idCardBackFilePath} ne null"
+                                     th:src="${userRealInfoBo.idCardBackFilePath}"/>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="medium-2 columns text-right" style="text-align: right;">
+                                <label class="right inline" style="color: #8a8a8a;">认证时间：</label>
+                            </div>
+                            <div class="medium-4 columns end" style="padding-left: 0;">
+                                <span style="color: #000000;height: 2rem;font-size: 0.875rem;"
+                                      th:value="${#dates.format(userRealInfoBo.authenticationTime,'yyyy-MM-dd')}"/>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div id="userRealInfo" th:if="${userRealInfoBo} eq null or ${userRealInfoBo.approveStatus} eq 2" >
+                    <div style="text-align: center;">
+                        <img th:src="@{/static/image/unauthentication.png}"/>
+                        <span th:text="您还未进行实名认证"></span>
+                    </div>
+                    <form id="userRealInfoFm" th:object="${userRealInfoCreateBo}" style="color: #000;margin-top: 24px;">
+                        <div class="row">
+                            <div class="medium-2 columns text-right">
+                                <label class="right inline" style="color: #8a8a8a;">姓名：</label>
+                            </div>
+                            <div class="medium-4 columns end" style="padding-left: 0;">
+                                <input type="text" placeholder="姓名"
+                                       style="color: #000000;height: 2rem;font-size: 0.875rem;" th:field="*{realName}"
+                                       required="required"/>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="medium-2 columns text-right" style="text-align: right;">
+                                <label class="right inline" style="color: #8a8a8a;">身份证号：</label>
+                            </div>
+                            <div class="medium-4 columns end" style="padding-left: 0;">
+                                <input type="text" placeholder="身份证号"
+                                       style="color: #000000;height: 2rem;font-size: 0.875rem;"
+                                       th:field="*{idNo}" required="required"/>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="medium-2 columns text-right" style="text-align: right;">
+                                <label class="right inline" style="color: #8a8a8a;">身份证到期时间：</label>
+                            </div>
+                            <div class="medium-4 columns end" style="padding-left: 0;">
+                                <input type="date" style="color: #000000;height: 2rem;font-size: 0.875rem;"
+                                       placeholder="身份证到期时间" th:field="*{idEndTime}" required="required"/>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="medium-2 columns text-right" style="text-align: right;">
+                                <label class="right inline" style="color: #8a8a8a;">身份证正反面照：</label>
+                            </div>
+                            <div class="medium-4 columns" style="padding-left: 0;">
+                                <input type="hidden" id="idCardFrontImgId" th:field="*{idCardFrontImgId}"
+                                       required="required"/>
+                                <input id="frontImgFile" name="file" type="file"/>
+                                <input type="button" value="上传"
+                                       onclick="uploadImg('frontImgFile','idCardFrontImgId','frontImg')"/>
+                                <img class="thumbnail course-item-thumbnail"
+                                     style="width:225px;height: 125px;display:none"
+                                     id="frontImg"/>
+                            </div>
+                            <div class="medium-4 columns end" style="padding-left: 0;">
+                                <input type="hidden" id="idCardBackImgId" th:field="*{idCardBackImgId}"
+                                       required="required"/>
+                                <input id="backImgFile" name="file" type="file"/>
+                                <input type="button" value="上传"
+                                       onclick="uploadImg('backImgFile','idCardBackImgId','backImg')"/>
+                                <img class="thumbnail course-item-thumbnail"
+                                     style="width:225px;height: 125px;display:none"
+                                     id="backImg"/>
+                            </div>
+                        </div>
+                        <div class="row" style="text-align: center;margin-top: 24px;">
+                            <input type="button" class="button" onclick="submitUserRealInfo()" value="提交"/>
+                        </div>
+
+                    </form>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div th:replace="base/common_js_imports :: commonjs"></div>
+<script type="text/javascript" th:src="@{/static/js/useroperate/userrealinfo.js}"></script>
+<script>
+    $(document).foundation();
+</script>
+</body>
+</html>

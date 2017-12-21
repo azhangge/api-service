@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<section style="background-color: white;">
+    <div class="bottom_widget">
+        <div class="bottom_link">
+            <div class="bottom_div">
+                <a href="/#" onclick="ifLogin()">
+                    <img th:src="@{/static/image/practice.png}" alt="" class="bottom_img"/>
+                    <div class="bottom_word1">练习</div>
+                    <div class="bottom_word2">学习后练习巩固知识</div>
+                </a>
+            </div>
+        </div>
+        <div class="bottom_link">
+            <div class="bottom_div">
+                <a href="/#" onclick="ifLogin()">
+                    <img th:src="@{/static/image/mistakes.png}" alt="" class="bottom_img"/>
+                    <div class="bottom_word1">错题</div>
+                    <div class="bottom_word2">错题自动收集</div>
+                </a>
+            </div>
+        </div>
+        <div class="bottom_link">
+            <div class="bottom_div">
+                <a href="/#" onclick="ifLogin()">
+                    <img th:src="@{/static/image/collect.png}" alt="" class="bottom_img"/>
+                    <div class="bottom_word1">收藏</div>
+                    <div class="bottom_word2">随时随地收藏题目</div>
+                </a>
+            </div>
+        </div>
+        <div class="bottom_link">
+            <div class="bottom_div">
+                <a href="/#" onclick="return ifLogin()">
+                    <img th:src="@{/static/image/exam.png}" alt="" class="bottom_img"/>
+                    <div class="bottom_word1">考试</div>
+                    <div class="bottom_word2">快速进入考试界面</div>
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+</html>

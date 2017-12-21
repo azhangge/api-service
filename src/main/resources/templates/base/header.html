@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<div class="row" style="height: 4rem;vertical-align: middle;line-height: 4rem;" th:fragment="header_bar">
+    <a th:href="@{/}"><img th:src="@{/static/image/logo.png}"/></a>
+    <img th:src="@{/static/image/slogan.png}" style="vertical-align: middle;"/>
+    <div class="float-right" style="display: inline-block;"
+         th:if="${ session == false or session.isLogin == null or session.isLogin == false}">
+        <a><img th:src="@{/static/image/app_download.png}" style="margin-right: 0.5rem;"/></a>
+        <a style="margin-right: 0.5rem;" data-open="login_form">登陆</a>
+        <span style="color: #2199e8;">/</span>
+        <a style="margin-left: 0.5rem;margin-right: 0.5rem;" data-open="register_form">注册</a>
+        <img th:src="@{/static/image/unlogin1.png}" style="width: 2rem; height: 2rem;"/>
+    </div>
+
+    <div class="float-right" style="display: inline-block;"
+         th:if="${session.isLogin != null and session.isLogin == true}">
+        <a><img th:src="@{/static/image/app_download.png}" style="margin-right: 0.5rem;"/></a>
+        <a th:href="@{/usercenterhome}">
+            <img th:if="${session.avatarUrl != null }" th:src="@{${session.avatarUrl}}" alt="" class="user_img"/>
+            <img th:if="${session.avatarUrl == null }" th:src="@{/static/image/unlogin1.png}" alt="" class="user_img"/>
+            <span th:text="${session.nickName}"></span>
+        </a>
+        <a th:href="@{/account/logoutportal}"><span style="color:#000;"> 退出</span></a>
+
+
+    </div>
+</div>
+</html>

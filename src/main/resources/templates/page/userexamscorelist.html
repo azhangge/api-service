@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>华杰云教育</title>
+    <link rel="stylesheet" th:href="@{/static/css/public/loading.css}"/>
+    <div th:include="base/common_css_imports :: commoncss"></div>
+</head>
+<body>
+
+<div th:replace="base/header_for_no_home :: header_bar"></div>
+<div style="background-color: #eeeeee;">
+    <div class="row" style="padding: 1rem 0;">
+        <div class="medium-2 columns">
+            <ul class="vertical menu" style="width: 100%;background-color: white;">
+                <li>
+                    <a href="#" style="font-size: 0.875rem;cursor: default;">账户设置</a>
+                    <ul class="nested vertical menu" style="font-size: 0.75rem;">
+                        <li><a th:href="@{/account/basicinfo/personalinfo}">个人信息</a></li>
+                        <li><a th:href="@{/account/realinfo/realinfo}">实名认证</a></li>
+                        <li><a th:href="@{/account/modifypwd}">账户安全</a></li>
+                        <li><a th:href="@{/teacher/detail}">讲师信息</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a th:href="@{/notice/user/list}" style="font-size: 0.875rem;">我的消息</a>
+                </li>
+                <li>
+                    <a href="#" style="font-size: 0.875rem;cursor: default;">我的课程</a>
+                    <ul class="nested vertical menu" style="font-size: 0.75rem;">
+                        <li><a href="/usercenter/operate?type=3">在学课程</a></li>
+                        <li><a href="/usercenter/operate?type=2">已购课程</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a th:href="@{/test/answer/list}" style="font-size: 0.875rem;cursor: default;">我的练习</a>
+                </li>
+                <li>
+                    <a href="#" style="font-size: 0.875rem;cursor: default;">我的考试</a>
+                    <ul class="nested vertical menu" style="font-size: 0.75rem;">
+                        <li><a href="/user/examplan/list">考试日程</a></li>
+                        <li><a href="/user/exam/score/list" style="color: red;">考试成绩</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#" style="font-size: 0.875rem;cursor: default;">我的收藏</a>
+                    <ul class="nested vertical menu" style="font-size: 0.75rem;">
+                        <li><a href="/usercenter/operate?type=1">课程收藏</a></li>
+                        <li><a href="/usercenter/operate?type=9">题集收藏</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+        <div class="medium-10 columns">
+            <div class="row">
+                <nav aria-label="You are here:" role="navigation">
+                    <ul class="breadcrumbs"
+                        style="background-color: white;margin-bottom: 1rem;padding: 0.5rem 0.875rem;font-size: 1.25rem;">
+                        <li><a href="#">我的考试</a></li>
+                        <li><a href="#">考试成绩</a></li>
+                    </ul>
+                </nav>
+            </div>
+            <div th:if="${#arrays.length(result.items)} == 0">
+                <div class="row" style="text-align: center;height: 240px; line-height:240px;background: white;">
+                    <span style="vertical-align: middle;">没有找到与您相关的考试结果</span>
+                </div>
+            </div>
+            <div th:if="${#arrays.length(result.items)} != 0">
+                <div class="row" style="background-color: white;padding-top:1.5rem;" id="test-answer-content-list">
+                    <a class="row " th:each="testAnswer:${result.items}"
+                       style="display:block;margin-top:0;margin-bottom:0.875rem;margin-left: 1.5rem;">
+                        <div class="medium-10 columns">
+                            <div class="row">
+                                <span style="font-size: 1rem;color: black;" href="#"
+                                      th:text="${testAnswer.name}"></span>
+                            </div>
+                            <div class="row" style="padding-left: 1rem;">
+                                <span style="font-size: 0.75rem;">分数：</span>
+                                <span style="font-size: 0.75rem; color: #999;margin-right: 2rem;"
+                                      th:text="${testAnswer.userScore}"></span>
+                                <span style="font-size: 0.75rem;">题数：</span>
+                                <span style="font-size: 0.75rem; color: #999;margin-right: 2rem;"
+                                      th:text="${testAnswer.questionNum}"></span>
+                                <span style="font-size: 0.75rem;">答对：</span>
+                                <span style="font-size: 0.75rem; color: #999;" th:text="${testAnswer.rightNum}"></span>
+                            </div>
+                        </div>
+                        <div class="medium-2 columns">
+                        <span style="font-size: 0.75rem; color: #999;" th:if="${testAnswer.submitTime ne null}"
+                              th:text="${#dates.format(testAnswer.submitTime,'yyyy-MM-dd HH:mm:ss')}"></span>
+                        </div>
+                    </a>
+                </div>
+                <div class="row" style="padding-right: 1.5rem;">
+                    <div id="page" class="float-right page_div"></div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<div th:replace="base/footer :: foot_section"></div>
+
+<div th:replace="base/common_js_imports :: commonjs"></div>
+<script type="text/javascript" th:src="@{/static/js/exam/score.js}"></script>
+<script type="text/javascript" th:src="@{/static/js/base/loading.js}"></script>
+<script th:inline="javascript">
+    var total = [[${result.total}]];
+    pageInit(total);
+</script>
+<script>
+    $(document).foundation();
+</script>
+
+
+</body>
+</html>

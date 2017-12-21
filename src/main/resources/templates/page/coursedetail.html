@@ -1,0 +1,284 @@
+<!doctype html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>华杰云教育</title>
+    <div th:replace="base/common_css_imports :: commoncss"></div>
+    <link rel="stylesheet" th:href="@{/static/css/public/star-rating.css}"/>
+    <link rel="stylesheet" th:href="@{/static/css/course/coursedetail.css}"/>
+    <link type="text/css" rel="stylesheet" th:href="@{/static/css/public/pagination.css}"/>
+    <style>
+        .fav {
+        }
+    </style>
+</head>
+<body>
+<div th:replace="base/header_for_no_home :: header_bar"></div>
+<br/>
+<div class="row columns">
+    <nav aria-label="You are here:" role="navigation">
+        <ul class="breadcrumbs">
+            <li><a th:href="@{'/index'}">首页</a></li>
+            <li><a th:href="@{'/courses'}">课程</a></li>
+        </ul>
+    </nav>
+</div>
+
+<div class="row">
+    <div class="medium-6 columns">
+        <img th:if="${course.thumbnailPath != null}" th:src="${course.thumbnailPath}"
+             class="thumbnail course-brief-thumbnail"/>
+        <img th:if="${course.thumbnailPath == null}" th:src="@{/static/image/default_course_thumbnail.png}"
+             class="thumbnail course-brief-thumbnail"/>
+    </div>
+    <div class="medium-6 large-5 columns">
+        <h3 th:text="${course.courseName}">课程名称</h3>
+        <div class="row course-brief-row">
+            <div class="medium-3 columns">
+                <label for="teachername" class="middle course-brief-title">讲师 :</label>
+            </div>
+            <div class="medium-3 columns">
+                <span th:text="${course.teacherName}" id="teachername" class="course-brief-info">讲师姓名</span>
+            </div>
+            <div class="medium-3 columns">
+                <label for="courseslen" class="middle course-brief-title">课时 :</label>
+            </div>
+            <div class="medium-3 columns">
+                <span th:text="${course.classHour}" id="courseslen" class="course-brief-info"></span>
+            </div>
+        </div>
+        <div class="row course-brief-row">
+            <div class="medium-3 columns">
+                <label for="studentnum" class="middle course-brief-title">学习人次 :</label>
+            </div>
+            <div class="medium-3 columns end ">
+                <span th:text="${course.accessCount}" id="studentnum" class="course-brief-info"></span>
+            </div>
+        </div>
+        <div class="row course-brief-row">
+            <div class="medium-2 columns end">
+                <a th:if="${course.isFavorite eq 1}" class="fa fa-star course-brief-operate fav">收藏</a>
+                <a th:if="${course.isFavorite eq 0}" class="fa fa-star-o course-brief-operate fav">收藏</a>
+            </div>
+            <!--
+            <div class="medium-2 columns end">
+                <a class="fa fa-share-alt course-brief-operate">分享</a>
+            </div>
+            -->
+        </div>
+        <input th:if="${course.isJoin == null}" type="button" value="加入课程" id="join_course_id" class="course-detail-join-button" onclick="joinCourse()" />
+        <input th:if="${course.isJoin == 1}" type="button" value="已加入课程" disabled="true" class="course-detail-joined-button" />
+    </div>
+</div>
+
+<div class="row">
+    <div class="medium-9 columns">
+        <ul class="tabs" data-tabs="" id="example-tabs">
+            <li class="tabs-title is-active">
+                <a href="#courseware-list-panel">目录</a>
+            </li>
+            <li class="tabs-title">
+                <a href="#course-brief-panel" aria-selected="true">简介</a>
+            </li>
+            <li class="tabs-title">
+                <a href="#course-comment-panel">评价</a>
+            </li>
+        </ul>
+        <div class="tabs-content" data-tabs-content="example-tabs" style="margin-bottom: 1.5rem;">
+            <div class="tabs-panel is-active" id="courseware-list-panel">
+                <div class="row courseware-container">
+                    <div th:each="chapter: ${course.chapters}" class="row course-chapter-row">
+                        <h5 class="course-chapter-title">第<span th:text="${chapter.chapterIndex}">1</span>章 <span
+                                th:text="${chapter.name}">章节名称</span></h5>
+
+                        <div th:each="section: ${chapter.children}" class="row course-section-row">
+                            <div class="medium-8 columns">
+                                <span th:text="${section.chapterIndex}" class="course-section-title">第一节</span>
+                                <span th:text="${section.name}" class="course-section-title">第一小节名称</span>
+                            </div>
+                            <div class="medium-2 columns">
+                                <i th:if="${section.resourceType == 2}" class="fa fa-file-video-o course-section-type">(<span
+                                        th:text="${section.second/60}">30</span>分钟)</i>
+                                <i th:if="${section.resourceType == 3}" class="fa fa-file-audio-o course-section-type">(<span
+                                        th:text="${section.second/60}">30</span>分钟)</i>
+                                <i th:if="${section.resourceType == 4}"
+                                   class="fa fa-file-pdf-o course-section-type"></i>
+                                <i th:if="${section.resourceType == 5}"
+                                   class="fa fa-file-word-o course-section-type"></i>
+                                <i th:if="${section.resourceType == 6}"
+                                   class="fa fa-file-powerpoint-o course-section-type"></i>
+                            </div>
+                            <div class="medium-2 columns">
+                                <a th:href="${section.resourcePath}"><i
+                                        class="fa fa-download course-section-operate"></i></a>
+                                <a th:if="${section.resourceType eq 2 || section.resourceType eq 3}"
+                                   th:href="@{'/course/'+${section.courseId}+'/'+${section.resourceId}+'?type='+ ${section.resourceType}}"
+                                   class="fa fa-play-circle-o course-section-operate"></a>
+                                <a th:if="${section.resourceType eq 4 || section.resourceType eq 5 || section.resourceType eq 6}"
+                                   th:href="@{'/course/'+${section.courseId}+'/'+${section.resourceId}+'?type='+ ${section.resourceType}}"
+                                   class="fa fa-eye course-section-operate"></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="tabs-panel" id="course-brief-panel">
+                <h4>课程简介</h4><hr/>
+                <div class="media-object stack-for-small">
+                    <div class="media-object-section">
+                        <p th:text="${course.descriptions}"></p>
+                    </div>
+                </div>
+            </div>
+            <div class="tabs-panel" id="course-comment-panel">
+                <div>
+                    评价<div class="fa fa-star-o course-brief-operate fav"></div>
+                    (<span th:text="${comments.total}"></span>人)
+                    <div style="float:right;color: blue">
+                        <button class="button" data-open="commentdialog">现在评论</button>
+                    </div>
+                </div>
+                <hr/>
+                <div th:if="${comments.total lt 1}">
+                    暂无评论... ...
+                </div>
+                <div th:if="${comments.total gt 0}">
+                    <div id="course-comment-list">
+                        <div th:each="comment:${comments.items}"
+                             style="margin-top: 3px;">
+                            <div class="row" style="padding: 4px 16px;">
+                                <img th:if="${comment.userFilePath != null } " th:src="${comment.userFilePath}"
+                                     style="height: 20px;width: 20px"/>
+                                <i th:if="${comment.userFilePath} == null" class="fa fa-user-circle" aria-hidden="true"
+                                   style="height: 20px;width: 20px"/>
+                                <i th:each="i : ${#numbers.sequence(1, comment.star)}" class="fa fa-star"
+                                   style="color: red;"></i>
+                                <span th:text="${#dates.format(comment.createDate,'yyyy-MM-dd HH:mm:ss')}"
+                                      style="font-size: 12px;color: blue;float:right;"></span>
+                            </div>
+                            <div class="row" style="padding: 4px 16px;">
+                                <span th:text="${comment.comment}" style="margin-left: 20px;font-weight: bold"></span>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="row" style="padding-right: 12px;">
+                        <div id="page" class="float-right page_div"></div>
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+
+    <div class="medium-3 columns">
+    </div>
+</div>
+
+<div class="reveal" id="commentdialog" data-reveal="" style="position: relative;">
+    <form style="margin-top: 32px;">
+        <div class="rating-block">
+            <div class="row" style="margin-left: 0px; margin-right: 0px; width: 100%;">
+                <div class="medium-2 columns"><span>星级：</span></div>
+                <div class="medium-5 columns end">
+                    <div class="rating-block-rating" data-rating="">
+                        <div class="star" onclick="poll(1)">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="40" height="37" viewBox="0 0 40 37">
+                                <polygon fill="none"
+                                         points="272 30 260.244 36.18 262.489 23.09 252.979 13.82 266.122 11.91 272 0 277.878 11.91 291.021 13.82 281.511 23.09 283.756 36.18"
+                                         transform="translate(-252)"/>
+                            </svg>
+                        </div>
+                        <div class="star" onclick="poll(2)">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="40" height="37" viewBox="0 0 40 37">
+                                <polygon fill="none"
+                                         points="272 30 260.244 36.18 262.489 23.09 252.979 13.82 266.122 11.91 272 0 277.878 11.91 291.021 13.82 281.511 23.09 283.756 36.18"
+                                         transform="translate(-252)"/>
+                            </svg>
+                        </div>
+                        <div class="star" onclick="poll(3)">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="40" height="37" viewBox="0 0 40 37">
+                                <polygon fill="none"
+                                         points="272 30 260.244 36.18 262.489 23.09 252.979 13.82 266.122 11.91 272 0 277.878 11.91 291.021 13.82 281.511 23.09 283.756 36.18"
+                                         transform="translate(-252)"/>
+                            </svg>
+                        </div>
+                        <div class="star" onclick="poll(4)">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="40" height="37" viewBox="0 0 40 37">
+                                <polygon fill="none"
+                                         points="272 30 260.244 36.18 262.489 23.09 252.979 13.82 266.122 11.91 272 0 277.878 11.91 291.021 13.82 281.511 23.09 283.756 36.18"
+                                         transform="translate(-252)"/>
+                            </svg>
+                        </div>
+                        <div class="star" onclick="poll(5)">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="40" height="37" viewBox="0 0 40 37">
+                                <polygon fill="none"
+                                         points="272 30 260.244 36.18 262.489 23.09 252.979 13.82 266.122 11.91 272 0 277.878 11.91 291.021 13.82 281.511 23.09 283.756 36.18"
+                                         transform="translate(-252)"/>
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <input id="poll-star" type="text" value="0" style="display:none;"/>
+        </div>
+        <div class="row">
+            <div class="medium-2 columns"><span>评论：</span></div>
+            <div class="medium-10 columns end">
+                <textarea id="course-comment-text" rows="5" placeholder="在这里写下您的学习感受吧..."></textarea>
+            </div>
+        </div>
+        <div class="row" style="text-align: center;">
+            <input class="button" type="button" value="提交" onclick="submitComment()"/>
+        </div>
+
+    </form>
+    <button class="close-button" data-close="" aria-label="Close modal" type="button">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+
+<div th:replace="base/login_form :: login_form"></div>
+<div th:replace="base/footer :: foot_section"></div>
+
+<div th:replace="base/common_js_imports :: commonjs"></div>
+<script th:src="@{/static/js/base/star-rating.js}"></script>
+<script th:src="@{/static/js/course/courseDetail.js}"></script>
+<script th:inline="javascript">
+    var courseId = [[${course.courseId}]];
+    $(".fav").click(function (e) {
+        var target = $(e.target);
+        if (target.hasClass("fa-star-o")) {
+            target.removeClass("fa-star-o");
+            target.addClass("fa-star");
+            favoriteCourse(courseId);
+        } else {
+            target.removeClass("fa-star");
+            target.addClass("fa-star-o");
+            unFavoriteCourse(courseId);
+        }
+    });
+
+    $(document).foundation();
+</script>
+<script th:inline="javascript">
+    var total = [[${comments.total}]];
+    var courseId = [[${course.courseId}]];
+    pageInit(total, courseId);
+</script>
+<script>
+    $(document).ready(function () {
+
+    })
+
+    function poll(i) {
+        $("#poll-star").val(i);
+    }
+</script>
+</body>
+</html>
+
+
+    

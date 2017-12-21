@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+
+<meta   http-equiv= "Pragma"   content= "no-cache" />
+<meta   http-equiv= "Cache-Control"   content= "no-cache" />
+<meta   http-equiv= "Expires"   content= "0" />
+
+<div class="reveal" id="register_form" data-reveal="" style="border: none; padding: 0;outline: none; position: relative;"
+     th:fragment="register_form">
+    <form onsubmit="false"  autocomplete="off">
+        <div class="sign-in-form">
+            <h4 class="text-center">账户注册</h4>
+            <label for="username">用户名<font color="red">（只能输入5-20个以字母开头、可带数字、“_”、“.”的字串 ）</font></label>
+            <input type="text" class="sign-in-form-username" id="username" autocomplete="off" value=""/>
+            <label for="password">密码<font color="red">（请输入4-20位用户密码）</font></label>
+            <input type="password" class="sign-in-form-password" id="password" autocomplete="off" value=""/>
+            <label for="re_password">确认密码</label>
+            <input type="password" class="sign-in-form-password" id="re_password" autocomplete="off" value=""/>
+            <label for="phone_no">手机号码</label>
+            <input type="text" class="sign-in-form-username" id="phone_no" autocomplete="off" value=""/>
+
+            <label for="code">验证码</label>
+            <div style="display: -webkit-inline-box;">
+                <input type="text" class="sign-in-form-username" id="code" autocomplete="off" value=""/>
+                <input type="button" class="sign-in-form-button" id="codeBtn" value="免费获取验证码"   onclick="sendCode();"  style="height: 40px;margin-left: 2px;font-size: 10px;line-height: 10px"/>
+            </div>
+            <input type="button" class="sign-in-form-button" value="注册" onclick="register();"/>
+        </div>
+    </form>
+
+    <button class="close-button" data-close="" aria-label="Close modal" type="button">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+</html>

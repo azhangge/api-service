@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>华杰云教育</title>
+    <div th:include="base/common_css_imports :: commoncss"></div>
+    <link rel="stylesheet" th:href="@{/static/css/public/loading.css}"/>
+</head>
+<body>
+
+<div th:replace="base/header_for_no_home :: header_bar"></div>
+<div style="background-color: #F2F2F2">
+    <div class="row">
+        <nav aria-label="You are here:" role="navigation">
+            <ul class="breadcrumbs" style="margin: 2rem 0 0 ;">
+                <li><a href="/">管理</a></li>
+                <li><a href="#">课程</a></li>
+            </ul>
+        </nav>
+    </div>
+
+    <div class="row">
+        课程名称：<input type="text" name="courseName" id="course-name"/>
+        <form enctype="multipart/form-data">
+            封面：<input type="file" name="file"/>
+            <button type="submit" value="确定" onclick="uploadImg()"/>
+        </form>
+        <img src="" id="img-path"/>
+        课程分类：
+        <select >
+            <div  th:each="category:${categorys}" >
+                <option th:text="${category.name}"></option>
+            </div>
+        </select>
+        <hr/>
+        <input type="text" name="mainCategoryId" id="mainCategoryId"/>
+        <input type="text" name="subCategoryId" id="subCategoryId"/>
+        章节模式：<input type="text" name="chapterType" id="chapterType"/>
+        开始时间：<input type="text" name="startTime" id="startTime"/>
+        结束时间：<input type="text" name="endTime" id="endTime"/>
+        课程讲师：<input type="text" name="teacherId" id="teacherId"/>
+        是否公开：<input type="text" name="isPublic" id="isPublic"/>
+        积分：<input type="text" name="score" id="score"/>
+        标签：<input type="text" name="tags" id="tags"/>
+        简介：<input type="text" name="descriptions" id="descriptions"/>
+    </div>
+</div>
+
+<div th:replace="base/login_form :: login_form"></div>
+<div th:include="base/footer"></div>
+<div th:include="base/common_js_imports :: commonjs"></div>
+<script th:inline="javascript">
+
+</script>
+</body>
+</html>

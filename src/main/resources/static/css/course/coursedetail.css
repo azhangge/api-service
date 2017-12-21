@@ -1,0 +1,101 @@
+
+. {
+
+}
+
+.course-brief-row {
+    padding-left: 1rem;
+}
+
+label.course-brief-title {
+    margin: 0;
+}
+
+.course-brief-thumbnail {
+    width: 650px;
+    height: 350px;
+}
+
+.course-brief-thumbnail:hover {
+    box-shadow: none;
+}
+
+.course-brief-info {
+    margin: 0 0;
+    padding: 0.526rem 0;
+    line-height: 1.8;
+    font-size: 0.875rem;
+    display: block;
+}
+
+.course-brief-operate {
+    color: #cacaca;
+    font-size: 0.875rem;
+    padding: 0.526rem 0;
+
+}
+
+.course-brief-operate::before {
+    color: #E3393C;
+    margin-right: 0.526rem;
+}
+
+.courseware-container {
+
+}
+
+.courseware-container .course-chapter-row {
+    padding-left: 1rem;
+    margin: 0;
+}
+
+.course-chapter-title {
+    margin-left: 0.875rem;
+}
+
+.courseware-container .course-section-row {
+    padding-left: 1rem;
+    margin: 0.526rem 1rem;
+}
+
+.course-section-row:hover {
+    background: #e1faea;
+}
+
+.course-section-title {
+    margin-left: 0.875rem;
+
+}
+
+.course-section-type {
+    color: #b7b8ba;
+}
+
+.course-section-type::before {
+    margin-right: 0.526rem;
+}
+
+.course-section-operate {
+    display: inline-block;
+    margin-right: 0.526rem;
+}
+
+.course-detail-join-button{
+    margin-top: 0.875rem;
+    width: 400px;
+    height: 50px;
+    background-color: #23abf0;
+    border: none;
+}
+
+.course-detail-joined-button{
+    margin-top: 0.875rem;
+    width: 400px;
+    height: 50px;
+    border: none;
+}
+
+.course-detail-joined-button:hover{
+    cursor: default;
+}
+

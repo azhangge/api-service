@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+
+<div class="row" style="margin-top: 0.875rem;" th:fragment="prompt_section">
+    <div class="medium-9 columns">
+        <div class="row course-title-row" style="margin-left: 0; padding-left: 1rem;">
+            <span class="course-category-title-main" th:text="${news.courseItemName}">最新课程</span>
+            <a class="float-right title-more" th:href="@{'/courses?orderBy=createTime'}"><span>更多<i
+                    class="fa fa-angle-double-right"></i></span></a>
+        </div>
+        <div class="row" data-equalizer="" data-equalize-on="medium" id="newest-course">
+            <a class="medium-3 columns" th:each="course:${news.newestCourses}"
+               th:href="@{'/course/'+ ${course.courseId}}">
+                <div class="callout" data-equalizer-watch="">
+                    <img th:if="${course.thumbnailPath} == null"
+                         th:src="@{/static/image/default_course_thumbnail.png}"/>
+                    <img th:if="${course.thumbnailPath} != null" th:src="${course.thumbnailPath}"/>
+                </div>
+                <h6 class="course-name" th:text="${course.courseName}">
+                    无名课程</h6>
+                <div class="course-item-info-row">
+                    <span th:text="${course.teacherName}">讲师姓名</span>
+                    <span class="float-right" th:text="${course.courseSecond}+'课时'">课时</span>
+                </div>
+            </a>
+        </div>
+        <div class="row course-title-row" style="margin-left: 0; padding-left: 1rem;">
+            <span class="course-category-title-main" th:text="${hots.courseItemName}">最热课程</span>
+            <a class="float-right title-more" th:href="@{'/courses?orderBy=top'}"><span>更多<i
+                    class="fa fa-angle-double-right"></i></span></a>
+        </div>
+        <div class="row" data-equalizer="" data-equalize-on="medium" id="hotest-course">
+            <a class="medium-3 columns" th:each="course:${hots.hotCourses}"
+               th:href="@{'/course/'+ ${course.courseId}}">
+                <div class="callout" data-equalizer-watch="">
+                    <img th:if="${course.thumbnailPath} == null"
+                         th:src="@{/static/image/default_course_thumbnail.png}"/>
+                    <img th:if="${course.thumbnailPath} != null" th:src="${course.thumbnailPath}"/>
+                </div>
+                <h6 class="course-name" th:text="${course.courseName}">
+                    无名课程</h6>
+                <div class="course-item-info-row">
+                    <span th:text="${course.teacherName}">讲师姓名</span>
+                    <span class="float-right" th:text="${course.courseSecond}+'课时'">课时</span>
+                </div>
+            </a>
+        </div>
+    </div>
+    <div class="medium-3 columns">
+        <!--
+        <div class="row course-title-row" style="margin-left: 0; padding-left: 1rem;">
+            <span class="course-category-title-main">人气讲师</span> <span class="float-right title-more">更多<i
+                class="fa fa-angle-double-right"></i></span>
+        </div>
+        <div class="row" data-equalizer="" data-equalize-on="medium" id="test-eq">
+            <div class="medium-12 columns">
+                <div class="callout" data-equalizer-watch="">
+                    <img src="assets/img/generic/square-1.jpg"/>
+                </div>
+            </div>
+            <div class="medium-12 columns">
+                <div class="callout" data-equalizer-watch="">
+                    <p>Pellentesque habitant morbi tristique senectus et netus et, ante.</p>
+                </div>
+            </div>
+            <div class="medium-12 columns">
+                <div class="callout" data-equalizer-watch="">
+                    <img src="assets/img/generic/rectangle-1.jpg"/>
+                </div>
+            </div>
+        </div>
+        -->
+    </div>
+</div>
+</html>

@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>华杰云教育</title>
+    <div th:include="base/common_css_imports :: commoncss"></div>
+
+    <link rel="stylesheet" th:href="@{/static/css/public/loading.css}"/>
+    <link rel="stylesheet" th:href="@{/static/css/course/courselist.css}"/>
+</head>
+<body>
+
+<div th:replace="base/header_for_no_home :: header_bar"></div>
+<div style="background-color: #F2F2F2">
+    <div class="row">
+        <nav aria-label="You are here:" role="navigation">
+            <ul class="breadcrumbs" style="margin: 2rem 0 0 ;">
+                <li><a th:href="@{/}">首页</a></li>
+                <li><a href="#">课程</a></li>
+            </ul>
+        </nav>
+    </div>
+
+    <div class="row">
+        <div class="medium-12 columns course-category-container">
+            <div class="row course-category-row">
+                <a class="course-category-all" onclick="getAllCourse()"><span id="category-all">全部</span></a>
+            </div>
+            <div class="row course-category-row" th:each="category :${categoryTree}">
+                <span class="course-category-main" th:text="${category.name}">主分类:</span>
+                <span><a class="course-category-sub" th:id="${category.courseCategoryId}"
+                         onclick="getMainCategoryId(event)">不限</a></span>
+                <span th:each="sub:${category.children}">
+                    <a class="course-category-sub" th:id="${sub.courseCategoryId}" th:text="${sub.name}"
+                       onclick="getSubCategoryId(event)">次分类</a>
+                </span>
+            </div>
+        </div>
+    </div>
+
+    <div class="row" style="margin-bottom: 0.825rem;">
+        <div class="medium-9 columns ">
+            <span>排序:</span>
+            <div id="course-sort-count" class="course-sort-type-container">
+                <a class="course-sort-type-title" style="vertical-align: middle;">学习人次</a>
+                <span class="fa fa-sort-asc course-sort-asc"></span>
+                <span class="fa fa-sort-desc course-sort-desc"></span>
+            </div>
+            <div id="course-sort-time" class="course-sort-type-container">
+                <a class="course-sort-type-title">上架时间</a>
+                <span class="fa fa-sort-asc course-sort-asc"></span>
+                <span class="fa fa-sort-desc course-sort-desc"></span>
+            </div>
+        </div>
+        <div class="medium-3 columns">
+            <div class="input-group input-group-rounded" style="margin-bottom: 0">
+                <input class="input-group-field" style="padding: 0.25rem 1rem; height: 1.8rem;" type="search"/>
+                <div class="input-group-button">
+                    <input type="submit" class="button secondary"
+                           style="height: 1.8rem;padding-top: 0.5rem;" value="搜索"
+                           onclick="queryKeyWord()"/>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="course-list" class="row small-up-2 medium-up-3 large-up-5 course-list">
+        <div class="column course-item-container" th:each="course:${result.items}">
+            <a th:href="@{'/course/'+ ${course.courseId}}">
+                <img class="thumbnail course-item-thumbnail" th:if="${course.thumbnailPath} == null"
+                     th:src="@{/static/image/default_course_thumbnail.png}"/>
+                <img class="thumbnail course-item-thumbnail" th:if="${course.thumbnailPath} != null"
+                     th:src="${course.thumbnailPath}"/>
+                <h6 style="padding-left: 0.825rem;" th:if="${course.courseName} == null">无名课程</h6>
+                <h6 class="course-list-item-name" th:if="${course.courseName} != null" th:text="${course.courseName}">
+                    无名课程</h6>
+                <div class="course-item-info-row" style="margin-top: 8px">
+                    <span th:if="${course.teacherName} == null">未知讲师</span>
+                    <span th:if="${course.teacherName} != null" th:text="${course.teacherName}">讲师姓名</span>
+                    <span class="float-right" th:text="${course.classHour}+'课时'">课时</span>
+                </div>
+            </a>
+        </div>
+    </div>
+    <div class="row">
+        <div id="page" class="float-right page_div"></div>
+    </div>
+</div>
+
+<div th:replace="base/login_form :: login_form"></div>
+<div th:include="base/footer"></div>
+<div th:include="base/common_js_imports :: commonjs"></div>
+<script type="text/javascript" th:src="@{/static/js/course/courseSearch.js}"></script>
+<script type="text/javascript" th:src="@{/static/js/base/loading.js}"></script>
+<script th:inline="javascript">
+    var total = [[${result.total}]];
+    goPage(total);
+
+</script>
+<script>
+    $(document).foundation();
+    $(document).ready(function () {
+        $('course-sort-time')
+        $("#course-sort-time " + " .course-sort-type-title").addClass("course-sort-type-active");
+        $("#course-sort-time " + " .course-sort-desc").addClass("course-sort-type-active");
+    });
+    </script>
+</body>
+</html>
