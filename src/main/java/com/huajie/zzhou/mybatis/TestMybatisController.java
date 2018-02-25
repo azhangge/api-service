@@ -16,6 +16,7 @@ public class TestMybatisController {
 
     @RequestMapping(value = "/mybatis", method = RequestMethod.GET)
     public AccountEntity test(){
-        return accountMapper.getAccountById("3b6348fd-0785-4364-a45d-0ed5cd35433f");
+//        return accountMapper.getAccountById("3b6348fd-0785-4364-a45d-0ed5cd35433f");
+        return null;
     }
 }
