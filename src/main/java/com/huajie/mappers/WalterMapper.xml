@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.huajie.vo.WalterVo">
+    <resultMap id="BaseResultMap" type="com.huajie.vo.WalterVo">
+        <id column="id" jdbcType="VARCHAR" property="id"/>
+        <result column="name" jdbcType="VARCHAR" property="name"/>
+    </resultMap>
+
+    <select id="findByName" resultMap="BaseResultMap">
+        select * from walter where name=#{name}
+    </select>
+
+</mapper>
