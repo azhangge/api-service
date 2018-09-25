@@ -1,11 +1,8 @@
 package com.huajie.configs;
 
-import lombok.Data;
-
 /**
  * Created by fangxing on 2017/7/6.
  */
-@Data
 public class EnvConstants {
 
     public static final String FILE_HOST = "192.168.1.250";
