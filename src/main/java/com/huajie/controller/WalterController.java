@@ -1,7 +1,7 @@
 package com.huajie.controller;
 
 import com.huajie.service.WalterService;
-import com.huajie.vo.WalterVo;
+import com.huajie.entity.vo.WalterVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;

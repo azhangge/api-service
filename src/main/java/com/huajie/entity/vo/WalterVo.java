@@ -1,4 +1,4 @@
-package com.huajie.vo;
+package com.huajie.entity.vo;
 
 public class WalterVo {
     private String id;

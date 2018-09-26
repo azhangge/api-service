@@ -1,6 +1,6 @@
 package com.huajie.dao;
 
-import com.huajie.vo.WalterVo;
+import com.huajie.entity.vo.WalterVo;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
