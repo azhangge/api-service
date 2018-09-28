@@ -7,7 +7,7 @@ import javax.persistence.Table;
 @Table(name = "walter")
 public class Walter {
     private String id;
-    private String name; //水来源，比如河名 湖名
+    private String walterName; //水来源，比如河名 湖名
     private Float clarity;//清晰度%
     private Float mineral;//矿物质%
     private Float organism;//有机物%
@@ -21,12 +21,12 @@ public class Walter {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getWalterName() {
+        return walterName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setWalterName(String walterName) {
+        this.walterName = walterName;
     }
 
     public Float getClarity() {

@@ -2,7 +2,7 @@ package com.huajie.entity.vo;
 
 public class WalterVo {
     private String id;
-    private String name;
+    private String walterName;
     private Float clarity;
     private Float mineral;
     private Float organism;
@@ -16,12 +16,12 @@ public class WalterVo {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getWalterName() {
+        return walterName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setWalterName(String walterName) {
+        this.walterName = walterName;
     }
 
     public Float getClarity() {

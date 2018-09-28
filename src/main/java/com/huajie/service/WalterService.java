@@ -1,6 +1,7 @@
 package com.huajie.service;
 
 import com.huajie.dao.WalterDao;
+import com.huajie.entity.Walter;
 import com.huajie.entity.vo.WalterVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,5 +21,9 @@ public class WalterService {
 
     public List<WalterVo> findWalter2Param(String id, String name){
         return walterDao.findWalter2Param(id, name);
+    }
+
+    public void insertWalter(Walter walter){
+        walterDao.insertWalter(walter);
     }
 }
