@@ -15,6 +15,6 @@ public class WalterService {
     private WalterDao walterDao;
 
     public List<WalterVo> findByName(String name){
-        return walterDao.findByName(name);
+        return walterDao.findWalter(name);
     }
 }

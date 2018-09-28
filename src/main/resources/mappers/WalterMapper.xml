@@ -6,8 +6,8 @@
         <result column="name" jdbcType="VARCHAR" property="name"/>
     </resultMap>
 
-    <select id="findByName" resultMap="BaseResultMap">
-        select w.id,w.name from walter w where w.name = #{name}
+    <select id="findWalter" resultMap="BaseResultMap">
+        select w.id,w.name from walter w where w.name = #{name2}
     </select>
 
 </mapper>

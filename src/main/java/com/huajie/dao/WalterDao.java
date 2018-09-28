@@ -6,5 +6,5 @@ import java.util.List;
 
 @Repository
 public interface WalterDao {
-    List<WalterVo> findByName(String name);
+    List<WalterVo> findWalter(String n_ame4);
 }
