@@ -10,6 +10,7 @@ import java.util.List;
 @Service
 public class WalterService {
 
+    //walterDao在mapper里面反向代理，这里不给spring管理bean也可以
     @Autowired
     private WalterDao walterDao;
 
