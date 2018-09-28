@@ -9,6 +9,6 @@ public interface WalterDao {
     //一个参数，参数明dao与mapper可以不一样
     List<WalterVo> findWalter(String n_ame4);
 
-    //2个参数时，3个方法：1 用@param指定  2 对象  3 用mybatis封装的map的key
+    //2个参数时，3个方法：1 用@param指定  2 对象  3 用mybatis封装的map的key(arg0,param1)
     List<WalterVo> findWalter2Param(String id, String name);
 }
