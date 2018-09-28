@@ -26,4 +26,8 @@ public class WalterService {
     public void insertWalter(Walter walter){
         walterDao.insertWalter(walter);
     }
+
+    public void insertWalters(List<Walter> walters){
+        walterDao.insertWalters(walters);
+    }
 }

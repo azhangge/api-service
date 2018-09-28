@@ -29,4 +29,19 @@
         );
     </insert>
 
+    <!--separator foreach里面的分割,open close只执行一次,index 从0开始-->
+    <insert id="insertWalters">
+        insert into walter(id,walter_name,clarity,mineral,organism,microorganism) values
+        <foreach collection="walters" item="walter" index="inx" separator="," open="" close="">
+            (
+            #{inx},
+            #{walter.walterName},
+            #{walter.clarity},
+            #{walter.mineral},
+            #{walter.organism},
+            #{walter.microorganism}
+            )
+        </foreach>
+    </insert>
+
 </mapper>

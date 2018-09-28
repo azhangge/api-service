@@ -18,4 +18,7 @@ public interface WalterDao {
     //插入
     //对象一定要用param指定
     void insertWalter(@Param("walter") Walter walter);
+
+    //批量插入
+    void insertWalters(@Param("walters") List<Walter> walters);
 }

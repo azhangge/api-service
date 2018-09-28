@@ -29,4 +29,9 @@ public class WalterController {
     public void findWalter2Param(@RequestBody Walter walter){
         walterService.insertWalter(walter);
     }
+
+    @RequestMapping(value = "/walter/inserts",method = RequestMethod.POST)
+    public void findWalter2Param(@RequestBody List<Walter> walters){
+        walterService.insertWalters(walters);
+    }
 }
