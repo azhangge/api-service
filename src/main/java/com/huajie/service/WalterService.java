@@ -17,4 +17,8 @@ public class WalterService {
     public List<WalterVo> findByName(String name){
         return walterDao.findWalter(name);
     }
+
+    public List<WalterVo> findWalter2Param(String id, String name){
+        return walterDao.findWalter2Param(id, name);
+    }
 }

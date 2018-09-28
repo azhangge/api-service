@@ -10,4 +10,8 @@
         select w.id,w.name from walter w where w.name = #{name2}
     </select>
 
+    <select id="findWalter2Param" resultMap="BaseResultMap">
+        select w.id,w.name from walter w where w.id = #{arg0} and w.name = #{arg1}
+    </select>
+
 </mapper>

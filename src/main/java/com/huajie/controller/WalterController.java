@@ -20,4 +20,10 @@ public class WalterController {
     public List<WalterVo> findByName(@RequestParam(value = "name") String name){
         return walterService.findByName(name);
     }
+
+    @RequestMapping(value = "/walter/param2",method = RequestMethod.GET)
+    public List<WalterVo> findWalter2Param(@RequestParam(value = "id") String id,
+                                           @RequestParam(value = "name") String name){
+        return walterService.findWalter2Param(id,name);
+    }
 }
