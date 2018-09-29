@@ -9,7 +9,7 @@ import java.io.Serializable;
 public class Water implements Serializable {
     private String id;
     private String cityId;
-    private String walterName; //水来源，比如河名 湖名
+    private String waterName; //水来源，比如河名 湖名
     private Float clarity;//清晰度%
     private Float mineral;//矿物质%
     private Float organism;//有机物%
@@ -31,12 +31,12 @@ public class Water implements Serializable {
         this.cityId = cityId;
     }
 
-    public String getWalterName() {
-        return walterName;
+    public String getWaterName() {
+        return waterName;
     }
 
-    public void setWalterName(String walterName) {
-        this.walterName = walterName;
+    public void setWaterName(String waterName) {
+        this.waterName = waterName;
     }
 
     public Float getClarity() {

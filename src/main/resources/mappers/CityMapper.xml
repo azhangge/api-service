@@ -1,12 +1,41 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.huajie.dao.CityDao">
-    <resultMap id="base" type="com.huajie.entity.City">
+    <resultMap id="cityBase" type="com.huajie.entity.City">
         <id column="id" jdbcType="VARCHAR" property="id"/>
         <result column="city_name" jdbcType="VARCHAR" property="cityName"/>
         <result column="city_level" jdbcType="INTEGER" property="cityLevel"/>
         <result column="gdp" jdbcType="FLOAT" property="gdp"/>
         <result column="people_num" jdbcType="FLOAT" property="peopleNum"/>
+    </resultMap>
+
+    <resultMap id="waterResultMap" type="com.huajie.entity.Water">
+        <id column="id" jdbcType="VARCHAR" property="id"/>
+        <result column="city_id" jdbcType="VARCHAR" property="cityId"/>
+        <result column="water_name" jdbcType="VARCHAR" property="waterName"/>
+        <result column="clarity" jdbcType="INTEGER" property="clarity"/>
+        <result column="mineral" jdbcType="FLOAT" property="mineral"/>
+        <result column="organism" jdbcType="FLOAT" property="organism"/>
+        <result column="microorganism" jdbcType="FLOAT" property="microorganism"/>
+    </resultMap>
+
+    <resultMap id="airResultMap" type="com.huajie.entity.Air">
+        <id column="id" jdbcType="VARCHAR" property="id"/>
+        <result column="city_id" jdbcType="VARCHAR" property="cityId"/>
+        <result column="pm" jdbcType="INTEGER" property="pm"/>
+        <result column="see" jdbcType="INTEGER" property="see"/>
+    </resultMap>
+
+    <resultMap id="cityDetail" type="com.huajie.vo.CityVo">
+        <id column="id" jdbcType="VARCHAR" property="id"/>
+        <result column="city_name" jdbcType="VARCHAR" property="cityName"/>
+        <result column="city_level" jdbcType="INTEGER" property="cityLevel"/>
+        <result column="gdp" jdbcType="FLOAT" property="gdp"/>
+        <result column="people_num" jdbcType="FLOAT" property="peopleNum"/>
+        <collection property="waters" ofType="com.huajie.vo.CityVo.waters" column="id"
+                    javaType="ArrayList" select="getWaterByCityId"/>
+        <collection property="airs" ofType="com.huajie.vo.CityVo.airs" column="id"
+                    javaType="ArrayList" select="getAirByCityId"/>
     </resultMap>
 
     <insert id="insertCity">
@@ -18,4 +47,16 @@
         people_num =#{city.peopleNum}
         )
     </insert>
+
+    <select id="getCityDetail" resultMap="cityDetail">
+        select * from city
+    </select>
+
+    <select id="getWaterByCityId" resultMap="waterResultMap">
+        select id from water
+    </select>
+
+    <select id="getAirByCityId" resultMap="airResultMap">
+        select id from air
+    </select>
 </mapper>

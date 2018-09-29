@@ -1,11 +1,13 @@
 package com.huajie.controller;
 
 import com.huajie.entity.City;
+import com.huajie.entity.Water;
 import com.huajie.service.CityService;
+import com.huajie.vo.CityVo;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("")
@@ -15,7 +17,17 @@ public class CityController {
     private CityService cityService;
 
     @RequestMapping(value = "/city",method = RequestMethod.POST)
-    public void insert(City city){
+    public void insert(@RequestBody City city){
         cityService.insertCity(city);
+    }
+
+    @RequestMapping(value = "/city",method = RequestMethod.GET)
+    public List<CityVo> findCityDetail(@RequestParam(value = "cityId") String cityId){
+        return cityService.findCityDetail(cityId);
+    }
+
+    @RequestMapping(value = "/city/water",method = RequestMethod.GET)
+    public List<Water> findWater(@RequestParam(value = "cityId") String cityId){
+        return cityService.findWaterByCityId(cityId);
     }
 }
