@@ -11,7 +11,10 @@
     </resultMap>
 
     <select id="findWalter" resultMap="BaseResultMap">
-        select * from walter w where w.walter_name = #{name2}
+        select * from walter w
+        <if test="name2 != null">
+            where w.walter_name = #{name2}
+        </if>
     </select>
 
     <select id="findWalter2Param" resultMap="BaseResultMap">

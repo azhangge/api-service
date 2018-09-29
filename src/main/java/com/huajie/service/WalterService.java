@@ -16,7 +16,7 @@ public class WalterService {
     @Autowired
     private WalterDao walterDao;
 
-    @Cacheable(value = "aaa",key = "#name")
+//    @Cacheable(value = "aaa",key = "#name")
     public List<WalterVo> findByName(String name){
         return walterDao.findWalter(name);
     }

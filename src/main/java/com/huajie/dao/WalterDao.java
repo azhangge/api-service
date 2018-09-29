@@ -10,7 +10,8 @@ import java.util.List;
 public interface WalterDao {
     //查询
     //一个参数，参数明dao与mapper可以不一样
-    List<WalterVo> findWalter(String n_ame4);
+    //用了<if test>之类的标签，不许用param指定参数
+    List<WalterVo> findWalter(@Param("name2") String name2);
 
     //2个参数时，3个方法：1 用@param指定  2 对象  3 用mybatis封装的map的key(arg0,param1)
     List<WalterVo> findWalter2Param(String id, String name);
