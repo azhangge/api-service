@@ -11,11 +11,11 @@
     </resultMap>
 
     <select id="findWalter" resultMap="BaseResultMap">
-        select w.id,w.name from walter w where w.walter_name = #{name2}
+        select * from walter w where w.walter_name = #{name2}
     </select>
 
     <select id="findWalter2Param" resultMap="BaseResultMap">
-        select w.id,w.name from walter w where w.id = #{arg0} and w.walter_name = #{arg1}
+        select w.id,w.walter_name from walter w where w.id = #{arg0} and w.walter_name = #{arg1}
     </select>
 
     <insert id="insertWalter">
