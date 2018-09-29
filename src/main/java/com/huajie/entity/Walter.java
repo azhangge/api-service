@@ -2,10 +2,11 @@ package com.huajie.entity;
 
 import javax.persistence.Entity;
 import javax.persistence.Table;
+import java.io.Serializable;
 
 @Entity
 @Table(name = "walter")
-public class Walter {
+public class Walter implements Serializable {
     private String id;
     private String walterName; //水来源，比如河名 湖名
     private Float clarity;//清晰度%

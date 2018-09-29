@@ -4,6 +4,7 @@ import com.huajie.dao.WalterDao;
 import com.huajie.entity.Walter;
 import com.huajie.entity.vo.WalterVo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -15,6 +16,7 @@ public class WalterService {
     @Autowired
     private WalterDao walterDao;
 
+    @Cacheable(value = "aaa",key = "#name")
     public List<WalterVo> findByName(String name){
         return walterDao.findWalter(name);
     }

@@ -6,6 +6,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Controller;
 
@@ -14,6 +15,7 @@ import org.springframework.stereotype.Controller;
  * Created by fangxing on 17-7-3.
  */
 
+@EnableCaching
 @MapperScan("com.huajie.dao")
 @SpringBootApplication
 @Controller
