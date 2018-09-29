@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.huajie.dao.AirDao">
+    <resultMap id="base" type="com.huajie.entity.Air">
+        <id column="id" jdbcType="VARCHAR" property="id"/>
+        <result column="city_id" jdbcType="VARCHAR" property="cityId"/>
+        <result column="pm" jdbcType="INTEGER" property="pm"/>
+        <result column="see" jdbcType="INTEGER" property="see"/>
+    </resultMap>
+
+    <insert id="insertAir">
+        INSERT INTO air(id,city_id,pm,see) values (
+        id = #{air.id},
+        city_id = #{air.cityId},
+        pm = #{pm},
+        see = #{see}
+        )
+    </insert>
+</mapper>

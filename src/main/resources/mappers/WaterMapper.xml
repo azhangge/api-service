@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.huajie.dao.WaterDao">
+    <resultMap id="BaseResultMap" type="com.huajie.entity.Water">
+        <id column="id" jdbcType="VARCHAR" property="id"/>
+        <result column="Water_name" jdbcType="VARCHAR" property="WaterName"/>
+        <result column="clarity" jdbcType="INTEGER" property="clarity"/>
+        <result column="mineral" jdbcType="FLOAT" property="mineral"/>
+        <result column="organism" jdbcType="FLOAT" property="organism"/>
+        <result column="microorganism" jdbcType="FLOAT" property="microorganism"/>
+    </resultMap>
+
+    <select id="findWater" resultMap="BaseResultMap">
+        select * from Water w
+        <if test="name2 != null">
+            where w.Water_name = #{name2}
+        </if>
+    </select>
+
+    <select id="findWater2Param" resultMap="BaseResultMap">
+        select w.id,w.Water_name from Water w where w.id = #{arg0} and w.Water_name = #{arg1}
+    </select>
+
+    <insert id="insertWater">
+        insert into Water(id,Water_name,clarity,mineral,organism,microorganism) values (
+          #{Water.id},
+          #{Water.WaterName},
+          #{Water.clarity},
+          #{Water.mineral},
+          #{Water.organism},
+          #{Water.microorganism}
+        );
+    </insert>
+
+    <!--separator foreach里面的分割,open close只执行一次,index 从0开始-->
+    <insert id="insertWaters">
+        insert into Water(id,Water_name,clarity,mineral,organism,microorganism) values
+        <foreach collection="Waters" item="Water" index="inx" separator="," open="" close="">
+            (
+            #{inx},
+            #{Water.WaterName},
+            #{Water.clarity},
+            #{Water.mineral},
+            #{Water.organism},
+            #{Water.microorganism}
+            )
+        </foreach>
+    </insert>
+
+</mapper>

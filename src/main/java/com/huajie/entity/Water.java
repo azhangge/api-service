@@ -6,8 +6,9 @@ import java.io.Serializable;
 
 @Entity
 @Table(name = "walter")
-public class Walter implements Serializable {
+public class Water implements Serializable {
     private String id;
+    private String cityId;
     private String walterName; //水来源，比如河名 湖名
     private Float clarity;//清晰度%
     private Float mineral;//矿物质%
@@ -20,6 +21,14 @@ public class Walter implements Serializable {
 
     public void setId(String id) {
         this.id = id;
+    }
+
+    public String getCityId() {
+        return cityId;
+    }
+
+    public void setCityId(String cityId) {
+        this.cityId = cityId;
     }
 
     public String getWalterName() {

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.huajie.dao.CityDao">
+    <resultMap id="base" type="com.huajie.entity.City">
+        <id column="id" jdbcType="VARCHAR" property="id"/>
+        <result column="city_name" jdbcType="VARCHAR" property="cityName"/>
+        <result column="city_level" jdbcType="INTEGER" property="cityLevel"/>
+        <result column="gdp" jdbcType="FLOAT" property="gdp"/>
+        <result column="people_num" jdbcType="FLOAT" property="peopleNum"/>
+    </resultMap>
+
+    <insert id="insertCity">
+        INSERT INTO air(id,city_name,city_level,gdp,people_num) values (
+        id = #{city.id},
+        city_name = #{city.cityName},
+        city_level = #{city.cityLevel},
+        gdp = #{city.gdb},
+        people_num =#{city.peopleNum}
+        )
+    </insert>
+</mapper>
