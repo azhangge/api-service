@@ -11,5 +11,5 @@ import java.util.List;
 public interface CityDao {
     void insertCity(City city);
 
-    List<CityVo> getCityDetail(@Param("cityId") String cityId);
+    List<CityVo> getCityDetail(@Param("cityId3") String cityId);
 }
