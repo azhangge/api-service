@@ -32,9 +32,9 @@
         <result column="city_level" jdbcType="INTEGER" property="cityLevel"/>
         <result column="gdp" jdbcType="FLOAT" property="gdp"/>
         <result column="people_num" jdbcType="FLOAT" property="peopleNum"/>
-        <collection property="waters" ofType="com.huajie.entity.Water" column="id"
+        <collection property="waters" ofType="com.huajie.entity.Water" column="{cityId=id}"
                     javaType="ArrayList" select="getWaterByCityId"/>
-        <collection property="airs" ofType="com.huajie.entity.Air" column="id"
+        <collection property="airs" ofType="com.huajie.entity.Air" column="{cityId=id}"
                     javaType="ArrayList" select="getAirByCityId"/>
     </resultMap>
 
@@ -49,7 +49,7 @@
     </insert>
 
     <select id="getCityDetail" resultMap="cityDetail">
-        select * from city
+        select * from city where id=#{cityId}
     </select>
 
     <select id="getWaterByCityId" resultMap="waterResultMap">

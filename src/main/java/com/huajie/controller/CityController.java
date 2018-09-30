@@ -1,7 +1,6 @@
 package com.huajie.controller;
 
 import com.huajie.entity.City;
-import com.huajie.entity.Water;
 import com.huajie.service.CityService;
 import com.huajie.vo.CityVo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,8 +25,4 @@ public class CityController {
         return cityService.findCityDetail(cityId);
     }
 
-    @RequestMapping(value = "/city/water",method = RequestMethod.GET)
-    public List<Water> findWater(@RequestParam(value = "cityId") String cityId){
-        return cityService.findWaterByCityId(cityId);
-    }
 }

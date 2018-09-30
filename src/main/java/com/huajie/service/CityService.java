@@ -23,7 +23,4 @@ public class CityService {
         return cityDao.getCityDetail(cityId);
     }
 
-    public List<Water> findWaterByCityId(String cityId){
-        return cityDao.getWaterByCityId(cityId);
-    }
 }
