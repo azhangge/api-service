@@ -48,8 +48,9 @@
         )
     </insert>
 
+    <!--默认关联字段asc-->
     <select id="getCityDetail" resultMap="cityDetail">
-        select * from city
+        select * from city order by id desc
     </select>
 
     <select id="getWaterByCityId" resultMap="waterResultMap">
