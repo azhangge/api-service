@@ -26,6 +26,7 @@
         <result column="see" jdbcType="INTEGER" property="see"/>
     </resultMap>
 
+    <!--association一对一，collection 一对多-->
     <resultMap id="cityDetail" type="com.huajie.vo.CityVo">
         <id column="id" jdbcType="VARCHAR" property="id"/>
         <result column="city_name" jdbcType="VARCHAR" property="cityName"/>
