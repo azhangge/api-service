@@ -30,4 +30,8 @@ public class WaterService {
     public void insertWaters(List<Water> waters){
         waterDao.insertWaters(waters);
     }
+
+    public List<Water> findByIds(String[] ids){
+        return waterDao.findByIds(ids);
+    }
 }

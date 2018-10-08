@@ -10,7 +10,7 @@ public interface WaterDao {
     //查询
     //一个参数，参数明dao与mapper可以不一样
     //用了<if test>之类的标签，不许用param指定参数
-    List<Water> findWater(@Param("name2") String name2);
+    List<Water> findWater(@Param("name") String name);
 
     //2个参数时，3个方法：1 用@param指定  2 对象  3 用mybatis封装的map的key(arg0,param1)
     List<Water> findWater2Param(String id, String name);
@@ -21,4 +21,6 @@ public interface WaterDao {
 
     //批量插入
     void insertWaters(@Param("Waters") List<Water> waters);
+
+    List<Water> findByIds(@Param("ids") String[] ids);
 }

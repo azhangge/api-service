@@ -33,4 +33,9 @@ public class WaterController {
     public void findWater2Param(@RequestBody List<Water> waters){
         waterService.insertWaters(waters);
     }
+
+    @RequestMapping(value = "/water/find",method = RequestMethod.GET)
+    public List<Water> findByIds(@RequestParam(value = "ids") String[] ids){
+        return waterService.findByIds(ids);
+    }
 }
