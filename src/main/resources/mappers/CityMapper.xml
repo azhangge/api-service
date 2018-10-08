@@ -51,7 +51,7 @@
 
     <!--默认关联字段asc-->
     <select id="getCityDetail" resultMap="cityDetail">
-        select * from city order by id desc
+        select * from city where id= #{cityId3}order by id desc
     </select>
 
     <select id="getWaterByCityId" resultMap="waterResultMap">
