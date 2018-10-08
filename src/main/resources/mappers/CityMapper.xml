@@ -26,16 +26,16 @@
         <result column="see" jdbcType="INTEGER" property="see"/>
     </resultMap>
 
-    <!--association一对一，collection 一对多-->
+    <!--association一对一,多对一，collection 一对多-->
     <resultMap id="cityDetail" type="com.huajie.vo.CityVo">
         <id column="id" jdbcType="VARCHAR" property="id"/>
         <result column="city_name" jdbcType="VARCHAR" property="cityName"/>
         <result column="city_level" jdbcType="INTEGER" property="cityLevel"/>
         <result column="gdp" jdbcType="FLOAT" property="gdp"/>
         <result column="people_num" jdbcType="FLOAT" property="peopleNum"/>
-        <collection property="waters" ofType="com.huajie.entity.Water" column="id"
+        <collection property="waters" ofType="com.huajie.entity.Water" column="city_name"
                     javaType="ArrayList" select="getWaterByCityId"/>
-        <collection property="airs" ofType="com.huajie.entity.Air" column="id"
+        <collection property="airs" ofType="com.huajie.entity.Air" column="city_name"
                     javaType="ArrayList" select="getAirByCityId"/>
     </resultMap>
 
@@ -55,10 +55,10 @@
     </select>
 
     <select id="getWaterByCityId" resultMap="waterResultMap">
-        select * from water w where w.city_id = #{cityId3}
+        select * from water w where w.city_id = #{city_name}
     </select>
 
     <select id="getAirByCityId" resultMap="airResultMap">
-        select * from air where city_id = #{cityId3}
+        select * from air where city_id = #{city_name}
     </select>
 </mapper>
