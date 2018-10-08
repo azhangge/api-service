@@ -47,6 +47,7 @@
         </foreach>
     </insert>
 
+    <!--collection 类型可以是array list map-->
     <select id="findByIds" resultMap="BaseResultMap">
         select * from water where id in
         <foreach collection="ids" item="id" index="" open="(" close=")" separator=",">
