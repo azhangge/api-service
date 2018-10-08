@@ -55,4 +55,12 @@
         </foreach>
     </select>
 
+    <!--如果是map，循环直接取得是value值，默认是数据在表里面的顺序，不是value顺序进行查询-->
+    <select id="findByMapIds" resultMap="BaseResultMap">
+        select * from water where city_id in
+        <foreach collection="ids" item="id" index="" open="(" close=")" separator=",">
+            #{id}
+        </foreach>
+    </select>
+
 </mapper>

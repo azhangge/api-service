@@ -4,6 +4,7 @@ import com.huajie.entity.Water;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 import java.util.List;
+import java.util.Map;
 
 @Repository
 public interface WaterDao {
@@ -23,4 +24,5 @@ public interface WaterDao {
     void insertWaters(@Param("Waters") List<Water> waters);
 
     List<Water> findByIds(@Param("ids") String[] ids);
+    List<Water> findByMapIds(@Param("ids") Map<String,String> ids);
 }

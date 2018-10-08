@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class WaterService {
@@ -33,5 +34,9 @@ public class WaterService {
 
     public List<Water> findByIds(String[] ids){
         return waterDao.findByIds(ids);
+    }
+
+    public List<Water> findByMapIds(Map<String,String> ids){
+        return waterDao.findByMapIds(ids);
     }
 }

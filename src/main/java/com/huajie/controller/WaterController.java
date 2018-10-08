@@ -5,7 +5,9 @@ import com.huajie.service.WaterService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("")
@@ -37,5 +39,13 @@ public class WaterController {
     @RequestMapping(value = "/water/find",method = RequestMethod.GET)
     public List<Water> findByIds(@RequestParam(value = "ids") String[] ids){
         return waterService.findByIds(ids);
+    }
+
+    @RequestMapping(value = "/water/findByMapIds",method = RequestMethod.GET)
+    public List<Water> findByMapIds(){
+        Map<String,String> ids = new HashMap<>();
+        ids.put("11","2");
+        ids.put("22","1");
+        return waterService.findByMapIds(ids);
     }
 }
