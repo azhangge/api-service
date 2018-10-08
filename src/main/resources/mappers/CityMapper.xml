@@ -27,6 +27,7 @@
     </resultMap>
 
     <!--association一对一,多对一，collection 一对多-->
+    <!--column并不是关联关系，1、对应resultMap的字段 2、只是collection查询的传参-->
     <resultMap id="cityDetail" type="com.huajie.vo.CityVo">
         <id column="id" jdbcType="VARCHAR" property="id"/>
         <result column="city_name" jdbcType="VARCHAR" property="cityName"/>
