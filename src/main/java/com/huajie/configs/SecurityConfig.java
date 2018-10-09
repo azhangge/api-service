@@ -12,11 +12,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         //允许所有
-        //http.anonymous();
-        http.authorizeRequests().antMatchers("/**/hello/**").permitAll()
-                .anyRequest().authenticated()
-                .and().authorizeRequests()
-                .and()
-                .formLogin().loginPage("/static/zhou/html/login.html");
+        http.anonymous();
+//        http.authorizeRequests().antMatchers("/**").permitAll()
+//                .anyRequest().authenticated()
+//                .and().authorizeRequests()
+//                .and()
+//                .formLogin().loginPage("/static/zhou/html/login.html");
     }
 }

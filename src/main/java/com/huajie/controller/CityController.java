@@ -22,6 +22,7 @@ public class CityController {
 
     @RequestMapping(value = "/city",method = RequestMethod.GET)
     public List<CityVo> findCityDetail(@RequestParam(value = "cityId") String cityId){
+        int n = 10/0;
         return cityService.findCityDetail(cityId);
     }
 
