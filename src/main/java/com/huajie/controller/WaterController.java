@@ -17,7 +17,8 @@ public class WaterController {
 
     @RequestMapping(value = "/water",method = RequestMethod.GET)
     public List<Water> findByName(@RequestParam(value = "name") String name){
-        return waterService.findByName(name);
+        throw new RuntimeException("aa");
+//        return waterService.findByName(name);
     }
 
     @RequestMapping(value = "/water/param2",method = RequestMethod.GET)
