@@ -24,7 +24,7 @@ public class UploadFileController {
 
 
     @RequestMapping(value = "/upload" ,method = RequestMethod.POST)
-    public void upload(MultipartFile files, HttpServletRequest request, HttpServletResponse response) throws IOException {
+    public void upload(MultipartFile[] files, HttpServletRequest request, HttpServletResponse response) throws IOException {
 
 //        if (new File("C:/Users/Administrator/Desktop/filetest/a.txt").exists()){
 //            new File("C:/Users/Administrator/Desktop/filetest/a.txt").delete();
@@ -38,13 +38,16 @@ public class UploadFileController {
 
         OutputStream out = new FileOutputStream(file);
 
-        InputStream is = files.getInputStream();
+        for (MultipartFile f:files){
+            InputStream is = f.getInputStream();
 
-        int len = 512;
-        byte[] sb = new byte[len];
-        while ((len = is.read(sb)) !=-1) {
-            out.write(sb,0, len);
+            int len = 512;
+            byte[] sb = new byte[len];
+            while ((len = is.read(sb)) !=-1) {
+                out.write(sb,0, len);
+            }
         }
+
 
         out.flush();
         out.close();

@@ -6,9 +6,10 @@ import java.util.Arrays;
  * @Author Administrator
  * @Date 2018/12/28 10:58
  * @Description
+ * 找到最小的，和第一个换
+ * 找到最小的，和第二个换
  */
-//找到最小的，和第一个换
-//找到最小的，和第二个换
+
 public class 选择排序 {
     public static void main(String[] args){
         int[] init = new int[]{3,2,1,9,3,11,88,3,7};
@@ -24,8 +25,10 @@ public class 选择排序 {
             temp = init[i];
             init[i] = init[minIndex];
             init[minIndex] = temp;
+            count++;
 
         }
         System.out.println(Arrays.toString(init));
+        System.out.println("次数"+count);
     }
 }

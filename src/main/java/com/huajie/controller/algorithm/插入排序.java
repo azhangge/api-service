@@ -6,9 +6,10 @@ import java.util.Arrays;
  * @Author Administrator
  * @Date 2018/12/28 10:07
  * @Description
+ * 前面22比较的比较，往前插入排序，保证前面的是完好序列
+ * 冒泡排序是其中的一种
  */
 
-//前面22比较的比较，往前插入排序，保证前面的是完好序列
 public class 插入排序 {
     public static void main(String[] args){
         int[] init = new int[]{3,2,1,9,3,11,88,3,7};
